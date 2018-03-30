@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane alignment="center" hgap="10" prefHeight="341.0" prefWidth="378.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
       <ColumnConstraints />
    </columnConstraints>
    <rowConstraints>
@@ -15,13 +21,18 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Pane prefHeight="200.0" prefWidth="200.0">
+      <Pane prefHeight="324.0" prefWidth="382.0" GridPane.columnIndex="1">
          <children>
             <Button fx:id="playFriendlyGameButton" layoutX="46.0" layoutY="14.0" mnemonicParsing="false" onAction="#playFriendlyGameLaunch" text="Play Friendly Game" />
             <Button fx:id="playTournamentButton" layoutX="51.0" layoutY="49.0" mnemonicParsing="false" onAction="#playTournamentLaunch" text="Play Tournament" />
             <Button fx:id="playYearButton" layoutX="72.0" layoutY="88.0" mnemonicParsing="false" onAction="#playYearLaunch" text="Play Year" />
             <Button fx:id="menRankingButton" layoutX="57.0" layoutY="130.0" mnemonicParsing="false" onAction="#menRaningLaunch" text="Men Ranking" />
             <Button fx:id="womenRankingButton" layoutX="48.0" layoutY="174.0" mnemonicParsing="false" onAction="#womenRankingLaunch" text="Women Ranking" />
+            <ImageView fx:id="pingpongLogo" fitHeight="150.0" fitWidth="200.0" layoutX="169.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/pingpong.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

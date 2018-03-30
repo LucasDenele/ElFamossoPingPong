@@ -2,6 +2,7 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
+import javafx.scene.image.Image;
 
 public class Controller {
 
@@ -25,4 +26,6 @@ public class Controller {
     public void womenRankingLaunch(ActionEvent actionEvent) {
         System.out.println("Launch Women Ranking");
     }
+    //@FXML
+    //Image pingpongLogo = new Image("../../img/pingpong.png", true);
 }
