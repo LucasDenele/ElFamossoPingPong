@@ -18,10 +18,10 @@
       <Pane prefHeight="200.0" prefWidth="200.0">
          <children>
             <Button fx:id="playFriendlyGameButton" layoutX="46.0" layoutY="14.0" mnemonicParsing="false" onAction="#playFriendlyGameLaunch" text="Play Friendly Game" />
-            <Button layoutX="51.0" layoutY="49.0" mnemonicParsing="false" text="Play Tournament" />
-            <Button layoutX="72.0" layoutY="88.0" mnemonicParsing="false" text="Play Year" />
-            <Button layoutX="57.0" layoutY="130.0" mnemonicParsing="false" text="Men Ranking" />
-            <Button layoutX="48.0" layoutY="174.0" mnemonicParsing="false" text="Women Ranking" />
+            <Button fx:id="playTournamentButton" layoutX="51.0" layoutY="49.0" mnemonicParsing="false" onAction="#playTournamentLaunch" text="Play Tournament" />
+            <Button fx:id="playYearButton" layoutX="72.0" layoutY="88.0" mnemonicParsing="false" onAction="#playYearLaunch" text="Play Year" />
+            <Button fx:id="menRankingButton" layoutX="57.0" layoutY="130.0" mnemonicParsing="false" onAction="#menRaningLaunch" text="Men Ranking" />
+            <Button fx:id="womenRankingButton" layoutX="48.0" layoutY="174.0" mnemonicParsing="false" onAction="#womenRankingLaunch" text="Women Ranking" />
          </children>
       </Pane>
    </children>
