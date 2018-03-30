@@ -6,7 +6,23 @@ import javafx.event.ActionEvent;
 public class Controller {
 
     @FXML
-    private void playFriendlyGameLaunch(ActionEvent event) {
+    public void playFriendlyGameLaunch(ActionEvent event) {
         System.out.println("Launch FriendlyGame");
+    }
+
+    public void playTournamentLaunch(ActionEvent actionEvent) {
+        System.out.println("Launch Tournament");
+    }
+
+    public void playYearLaunch(ActionEvent actionEvent) {
+        System.out.println("Launch Year");
+    }
+
+    public void menRaningLaunch(ActionEvent actionEvent) {
+        System.out.println("Launch Men Ranking");
+    }
+
+    public void womenRankingLaunch(ActionEvent actionEvent) {
+        System.out.println("Launch Women Ranking");
     }
 }
