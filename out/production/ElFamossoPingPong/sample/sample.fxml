@@ -28,7 +28,7 @@
             <Button fx:id="playYearButton" layoutX="72.0" layoutY="88.0" mnemonicParsing="false" onAction="#playYearLaunch" text="Play Year" />
             <Button fx:id="menRankingButton" layoutX="57.0" layoutY="130.0" mnemonicParsing="false" onAction="#menRaningLaunch" text="Men Ranking" />
             <Button fx:id="womenRankingButton" layoutX="48.0" layoutY="174.0" mnemonicParsing="false" onAction="#womenRankingLaunch" text="Women Ranking" />
-            <ImageView fx:id="pingpongLogo" fitHeight="150.0" fitWidth="200.0" layoutX="169.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="pingpongLogo" fitHeight="150.0" fitWidth="200.0" layoutX="196.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/pingpong.png" />
                </image>
