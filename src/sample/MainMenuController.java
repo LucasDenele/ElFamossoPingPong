@@ -2,12 +2,11 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
-import javafx.scene.image.Image;
 
-public class Controller {
+public class MainMenuController {
 
     @FXML
-    public void playFriendlyGameLaunch(ActionEvent event) {
+    public void playFriendlyGameLaunch(ActionEvent actionEvent) {
         System.out.println("Launch FriendlyGame");
     }
 
@@ -26,6 +25,4 @@ public class Controller {
     public void womenRankingLaunch(ActionEvent actionEvent) {
         System.out.println("Launch Women Ranking");
     }
-    //@FXML
-    //public Image pingpongLogo ;
 }
