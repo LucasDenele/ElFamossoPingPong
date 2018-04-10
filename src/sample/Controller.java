@@ -27,5 +27,5 @@ public class Controller {
         System.out.println("Launch Women Ranking");
     }
     //@FXML
-    //Image pingpongLogo = new Image("../../img/pingpong.png", true);
+    //public Image pingpongLogo ;
 }
