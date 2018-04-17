@@ -49,4 +49,6 @@ public class RankingController extends AbstractController{
     }
 
 
+    public void searchLaunch(ActionEvent actionEvent) {
+    }
 }

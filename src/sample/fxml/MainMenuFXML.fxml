@@ -26,7 +26,7 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      <Button fx:id="rankingButton" layoutX="212.0" layoutY="207.0" mnemonicParsing="false" onAction="#rankingLaunch" opacity="0.9" prefHeight="71.0" prefWidth="178.0" text="Ranking">
+      <Button fx:id="rankingButton" layoutX="14.0" layoutY="188.0" mnemonicParsing="false" onAction="#rankingLaunch" opacity="0.9" prefHeight="71.0" prefWidth="178.0" text="Ranking">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
@@ -51,5 +51,10 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
+      <Button fx:id="searchButton" layoutX="408.0" layoutY="188.0" mnemonicParsing="false" onAction="#searchLaunch" opacity="0.9" prefHeight="71.0" prefWidth="178.0" text="Search">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

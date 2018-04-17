@@ -15,6 +15,7 @@ public class MainMenuController {
     public Button playTournamentButton;
     public Button playYearButton;
     public Button rankingButton;
+    public Button searchButton;
 
     @FXML
     public void playFriendlyGameLaunch(ActionEvent actionEvent) throws Exception {
@@ -50,12 +51,20 @@ public class MainMenuController {
 
     public void rankingLaunch(ActionEvent actionEvent) {
 
-        System.out.println("Launch Men Ranking");
-        try {
+        System.out.println("Launch Ranking");
+       try {
             sceneSwitcher.uploadNewScene((Stage)rankingButton.getScene().getWindow(),"fxml/RankingMainFXML.fxml", 600, 400);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public void searchLaunch(ActionEvent actionEvent) {
+        System.out.println("Launch Search");
+        try {
+            sceneSwitcher.uploadNewScene((Stage)searchButton.getScene().getWindow(),"fxml/SearchMenuFXML.fxml", 600, 400);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
