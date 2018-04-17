@@ -14,15 +14,14 @@ public class MainMenuController {
     public Button playFriendlyGameButton;
     public Button playTournamentButton;
     public Button playYearButton;
-    public Button menRankingButton;
-    public Button womenRankingButton;
+    public Button rankingButton;
 
     @FXML
     public void playFriendlyGameLaunch(ActionEvent actionEvent) throws Exception {
 
         System.out.println("Launch FriendlyGame");
         try {
-            sceneSwitcher.uploadNewScene((Stage)playFriendlyGameButton.getScene().getWindow(),"fxml/PlayFriendlyGameMainFXML.fxml");
+            sceneSwitcher.uploadNewScene((Stage)playFriendlyGameButton.getScene().getWindow(),"fxml/PlayFriendlyGameMainFXML.fxml",600, 400);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -33,7 +32,7 @@ public class MainMenuController {
 
         System.out.println("Launch Tournament");
         try {
-            sceneSwitcher.uploadNewScene((Stage)playTournamentButton.getScene().getWindow(),"fxml/PlayTournamentMainFXML.fxml");
+            sceneSwitcher.uploadNewScene((Stage)playTournamentButton.getScene().getWindow(),"fxml/PlayTournamentMainFXML.fxml", 600, 400);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,29 +42,20 @@ public class MainMenuController {
 
         System.out.println("Launch Year");
         try {
-            sceneSwitcher.uploadNewScene((Stage)playYearButton.getScene().getWindow(),"fxml/PlayYearMainFXML.fxml");
+            sceneSwitcher.uploadNewScene((Stage)playYearButton.getScene().getWindow(),"fxml/PlayYearMainFXML.fxml", 600, 400);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void menRankingLaunch(ActionEvent actionEvent) {
+    public void rankingLaunch(ActionEvent actionEvent) {
 
         System.out.println("Launch Men Ranking");
         try {
-            sceneSwitcher.uploadNewScene((Stage)menRankingButton.getScene().getWindow(),"fxml/MenRankingMainFXML.fxml");
+            sceneSwitcher.uploadNewScene((Stage)rankingButton.getScene().getWindow(),"fxml/RankingMainFXML.fxml", 600, 400);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void womenRankingLaunch(ActionEvent actionEvent) {
-
-        System.out.println("Launch Women Ranking");
-        try {
-            sceneSwitcher.uploadNewScene((Stage)womenRankingButton.getScene().getWindow(),"fxml/WomenRankingMainFXML.fxml");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

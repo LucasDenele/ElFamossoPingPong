@@ -12,7 +12,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("fxml/MainMenuFXML.fxml"));
         primaryStage.setTitle("Projet Java CIR3");
-        primaryStage.setScene(new Scene(root, 479, 385));
+        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
