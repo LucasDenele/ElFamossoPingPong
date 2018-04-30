@@ -1,23 +1,35 @@
 package player;
 
-public class Player {
+public class Player{
 	
 	//Attributes
 	private String name;
 	private int id;
 	private String gender;
-	private int endurance;
-	private int power;
+	private String country;
+	private float endurance;
+	private float power;
 	private double points;
 	
 	//Constructor
-	public Player(String name, int id, String gender, int endurance, int power, double points) {
+	public Player(String name, int id, String country, String gender, float endurance, float power, double points) {
 		this.setName(name);
 		this.setId(id);
+		this.setCountry(country);
 		this.setGender(gender);
 		this.setEndurance(endurance);
 		this.setPower(power);
 		this.setPoints(points);
+	}
+	
+	public void display() {
+		System.out.println("Name : "+this.getName()+
+						"| ID : "+this.getId()+
+						"| Country : "+this.getCountry()+
+						"| Gender : "+this.getGender()+
+						"| Endurance : "+this.getEndurance()+
+						"| Power : "+this.getPower()+
+						"| Points : "+this.getPoints());
 	}
 	
 	//Getters & Setters
@@ -33,23 +45,29 @@ public class Player {
 	public void setId(int id) {
 		this.id = id;
 	}
+	public String getCountry() {
+		return this.country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
 	public String getGender() {
 		return gender;
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public int getEndurance() {
+	public float getEndurance() {
 		return endurance;
 	}
-	public void setEndurance(int endurance) {
-		this.endurance = endurance;
+	public void setEndurance(float endurance2) {
+		this.endurance = endurance2;
 	}
-	public int getPower() {
+	public float getPower() {
 		return power;
 	}
-	public void setPower(int power) {
-		this.power = power;
+	public void setPower(float power2) {
+		this.power = power2;
 	}
 	public double getPoints() {
 		return points;
@@ -57,5 +75,6 @@ public class Player {
 	public void setPoints(double points) {
 		this.points = points;
 	}
+
 
 }
