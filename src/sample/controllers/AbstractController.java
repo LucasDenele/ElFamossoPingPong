@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import sample.SceneSwitcher;
 
-public class MenRankingController {
+public class AbstractController {
 
     SceneSwitcher sceneSwitcher = new SceneSwitcher();
 
@@ -16,7 +16,7 @@ public class MenRankingController {
     @FXML
     public void backToMainMenu(ActionEvent actionEvent) {
         try {
-            sceneSwitcher.uploadNewScene((Stage)backToMainMenuButton.getScene().getWindow(),"fxml/MainMenuFXML.fxml");
+            sceneSwitcher.uploadNewScene((Stage)backToMainMenuButton.getScene().getWindow(),"fxml/MainMenuFXML.fxml", 600, 400);
         } catch (Exception e) {
             e.printStackTrace();
         }

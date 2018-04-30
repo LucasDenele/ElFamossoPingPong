@@ -1,9 +1,9 @@
 package match;
 
+import player.Player;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import player.Player;
 
 public class Game {
 	

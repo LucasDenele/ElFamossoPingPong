@@ -1,11 +1,11 @@
 package match;
 
+import player.Player;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import player.Player;
 
 public class Rank {
 	
