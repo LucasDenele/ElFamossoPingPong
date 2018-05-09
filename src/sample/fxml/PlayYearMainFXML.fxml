@@ -20,5 +20,12 @@
          </font>
       </Label>
       <Button fx:id="backToMainMenuButton" layoutX="24.0" layoutY="23.0" mnemonicParsing="false" onAction="#backToMainMenu" text="Back" />
+      <Label layoutX="120.0" layoutY="142.0" text="Are you shure to launch a year ?">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="166.0" layoutY="224.0" mnemonicParsing="false" text="Yes" />
+      <Button layoutX="370.0" layoutY="224.0" mnemonicParsing="false" text="No" />
    </children>
 </AnchorPane>

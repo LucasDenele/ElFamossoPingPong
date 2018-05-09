@@ -18,11 +18,11 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      <Button fx:id="playTournamentButton" layoutX="408.0" layoutY="83.0" mnemonicParsing="false" onAction="#playTournamentLaunch" opacity="0.9" prefHeight="71.0" prefWidth="178.0" text="Play Tournament">
+      <Button fx:id="playTournamentButton" layoutX="210.0" layoutY="83.0" mnemonicParsing="false" onAction="#playTournamentLaunch" opacity="0.9" prefHeight="71.0" prefWidth="178.0" text="Play Tournament">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      <Button fx:id="playYearButton" layoutX="212.0" layoutY="83.0" mnemonicParsing="false" onAction="#playYearLaunch" opacity="0.9" prefHeight="71.0" prefWidth="178.0" text="Play Year">
+      <Button fx:id="playYearButton" layoutX="408.0" layoutY="83.0" mnemonicParsing="false" onAction="#playYearLaunch" opacity="0.9" prefHeight="71.0" prefWidth="178.0" text="Play Year">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
