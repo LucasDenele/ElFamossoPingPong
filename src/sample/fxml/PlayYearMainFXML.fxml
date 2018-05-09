@@ -20,7 +20,7 @@
          </font>
       </Label>
       <Button fx:id="backToMainMenuButton" layoutX="24.0" layoutY="23.0" mnemonicParsing="false" onAction="#backToMainMenu" text="Back" />
-      <Label layoutX="120.0" layoutY="142.0" text="Are you shure to launch a year ?">
+      <Label layoutX="120.0" layoutY="142.0" text="Are you sure to launch a year ?">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
