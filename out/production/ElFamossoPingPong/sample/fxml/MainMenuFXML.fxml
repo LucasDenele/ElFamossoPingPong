@@ -7,54 +7,59 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.MainMenuController">
-   <children>
-      <ImageView fitHeight="400.0" fitWidth="606.0" layoutX="-4.0" opacity="0.7" pickOnBounds="true">
-         <image>
-            <Image url="@PingPongBackground.jpg" />
-         </image>
-      </ImageView>
-      <Button fx:id="playFriendlyGameButton" layoutX="14.0" layoutY="83.0" mnemonicParsing="false" onAction="#playFriendlyGameLaunch" opacity="0.9" prefHeight="71.0" prefWidth="178.0" text="Play Friendly Game" textAlignment="CENTER">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Button>
-      <Button fx:id="playTournamentButton" layoutX="210.0" layoutY="83.0" mnemonicParsing="false" onAction="#playTournamentLaunch" opacity="0.9" prefHeight="71.0" prefWidth="178.0" text="Play Tournament">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Button>
-      <Button fx:id="playYearButton" layoutX="408.0" layoutY="83.0" mnemonicParsing="false" onAction="#playYearLaunch" opacity="0.9" prefHeight="71.0" prefWidth="178.0" text="Play Year">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Button>
-      <Button fx:id="rankingButton" layoutX="14.0" layoutY="188.0" mnemonicParsing="false" onAction="#rankingLaunch" opacity="0.9" prefHeight="71.0" prefWidth="178.0" text="Ranking">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Button>
-      <ImageView fitHeight="46.0" fitWidth="59.0" layoutX="390.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@pingpong.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="228.0" layoutY="10.0" text="Table Tennis" textAlignment="CENTER">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="234.0" layoutY="369.0" text="Made by : Anthony CARLIER, Timothée de COLNET, Lucas DENELE" />
-      <ImageView fitHeight="46.0" fitWidth="59.0" layoutX="169.0" layoutY="22.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@pingpong.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="246.0" layoutY="45.0" text="Simulator">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <Button fx:id="searchButton" layoutX="408.0" layoutY="188.0" mnemonicParsing="false" onAction="#searchLaunch" opacity="0.9" prefHeight="71.0" prefWidth="178.0" text="Search">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.MainMenuController">
+   <ImageView fitHeight="400.0" fitWidth="606.0" layoutX="-4.0" opacity="0.7" pickOnBounds="true">
+      <Image url="@PingPongBackground.jpg"/>
+   </ImageView>
+   <Button fx:id="playFriendlyGameButton" layoutX="14.0" layoutY="83.0" mnemonicParsing="false"
+           onAction="#playFriendlyGameLaunch" opacity="0.9" prefHeight="71.0" prefWidth="178.0"
+           text="Play Friendly Game" textAlignment="CENTER">
+      <font>
+         <Font name="System Bold" size="12.0"/>
+      </font>
+   </Button>
+   <Button fx:id="playTournamentButton" layoutX="210.0" layoutY="83.0" mnemonicParsing="false"
+           onAction="#playTournamentLaunch" opacity="0.9" prefHeight="71.0" prefWidth="178.0" text="Play Tournament">
+      <font>
+         <Font name="System Bold" size="12.0"/>
+      </font>
+   </Button>
+   <Button fx:id="playYearButton" layoutX="408.0" layoutY="83.0" mnemonicParsing="false" onAction="#playYearLaunch"
+           opacity="0.9" prefHeight="71.0" prefWidth="178.0" text="Play Year">
+      <font>
+         <Font name="System Bold" size="12.0"/>
+      </font>
+   </Button>
+   <Button fx:id="rankingButton" layoutX="14.0" layoutY="188.0" mnemonicParsing="false" onAction="#rankingLaunch"
+           opacity="0.9" prefHeight="71.0" prefWidth="178.0" text="Ranking">
+      <font>
+         <Font name="System Bold" size="12.0"/>
+      </font>
+   </Button>
+   <ImageView fitHeight="46.0" fitWidth="59.0" layoutX="390.0" layoutY="22.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@pingpong.png"/>
+   </ImageView>
+   <Label layoutX="228.0" layoutY="10.0" text="Table Tennis" textAlignment="CENTER">
+      <font>
+         <Font name="System Bold" size="24.0"/>
+      </font>
+   </Label>
+   <Label layoutX="234.0" layoutY="369.0" text="Made by : Anthony CARLIER, Timothée de COLNET, Lucas DENELE"/>
+   <ImageView fitHeight="46.0" fitWidth="59.0" layoutX="169.0" layoutY="22.0" nodeOrientation="RIGHT_TO_LEFT"
+              pickOnBounds="true" preserveRatio="true">
+      <Image url="@pingpong.png"/>
+   </ImageView>
+   <Label layoutX="246.0" layoutY="45.0" text="Simulator">
+      <font>
+         <Font name="System Bold" size="24.0"/>
+      </font>
+   </Label>
+   <Button fx:id="searchButton" layoutX="408.0" layoutY="188.0" mnemonicParsing="false" onAction="#searchLaunch"
+           opacity="0.9" prefHeight="71.0" prefWidth="178.0" text="Search">
+      <font>
+         <Font name="System Bold" size="12.0"/>
+      </font>
+   </Button>
 </AnchorPane>
