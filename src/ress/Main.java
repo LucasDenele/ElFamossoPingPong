@@ -3,9 +3,11 @@ package ress;
 import java.util.ArrayList;
 import java.util.List;
 
-import match.Game;
+import match.Match;
 import match.Rank;
+import match.Round;
 import match.Set;
+import match.Tournament;
 import player.Player;
 
 public class Main {
@@ -48,13 +50,73 @@ public class Main {
 		set3.run();
 		set4.run();
 	*/
+		/*
 		//Creation a game with many sets
-		Player p1 = new Player("Joueur1", 0, "FRA", "male", 70, 50, 340);
-		Player p2 = new Player("Joueur2", 1, "FRA", "male", 80, 40, 12);
-		Game game1 = new Game(1, p1, p2);
+		Player p1 = new Player("Joueur1", 0, "FRA", "male", 70, 50, 300);
+		Player p2 = new Player("Joueur2", 1, "FRA", "male", 80, 40, 142);
+		Player p3 = new Player("Joueur3", 2, "FRA", "male", 90, 50, 340);
+		Player p4 = new Player("Joueur4", 3, "FRA", "male", 80, 60, 12);
+		Match game1 = new Match(0, p1, p2);
+		
+		Match game2 = new Match(1, p3, p4);
 		game1.start();
-		Game game2 = new Game(2, p1, p2);
 		game2.start();
+		*/
+		
+		/*
+		Player p1 = new Player("Joueur1", 0, "FRA", "male", 70, 50, 300);
+		Player p2 = new Player("Joueur2", 1, "FRA", "male", 80, 40, 142);
+		Player p3 = new Player("Joueur3", 2, "FRA", "male", 90, 50, 340);
+		Player p4 = new Player("Joueur4", 3, "FRA", "male", 80, 60, 12);
+		Player p5 = new Player("Joueur5", 4, "FRA", "male", 70, 50, 300);
+		Player p6 = new Player("Joueur6", 5, "FRA", "male", 80, 40, 142);
+		Player p7 = new Player("Joueur7", 6, "FRA", "male", 90, 50, 340);
+		Player p8 = new Player("Joueur8", 7, "FRA", "male", 80, 60, 12);
+		List<Player> test = new ArrayList<Player>(); 
+		test.add(p1);test.add(p2);test.add(p3);test.add(p4);
+		test.add(p5);test.add(p6);test.add(p7);test.add(p8);
+		List<String[]> allPlayers = new ArrayList<String[]>();
+		
+		for(Player p : test) {
+			String[] r = new String[3];
+			r[0] = p.getName(); //name
+			r[1] = "1"; //roundMax
+			r[2] = "0"; //pointsTournament
+			allPlayers.add(r);
+		}
+		
+		Round r1 = new Round(0, test, allPlayers);
+		r1.start();
+		*/
+		
+		/*
+		Player p1 = new Player("Joueur1", 0, "FRA", "male", 70, 50, 300);
+		Player p2 = new Player("Joueur2", 1, "FRA", "male", 80, 40, 142);
+		Player p3 = new Player("Joueur3", 2, "FRA", "male", 90, 50, 340);
+		Player p4 = new Player("Joueur4", 3, "FRA", "male", 80, 60, 12);
+		Player p5 = new Player("Joueur5", 4, "FRA", "male", 70, 50, 300);
+		Player p6 = new Player("Joueur6", 5, "FRA", "male", 80, 40, 142);
+		Player p7 = new Player("Joueur7", 6, "FRA", "male", 90, 50, 340);
+		Player p8 = new Player("Joueur8", 7, "FRA", "male", 80, 60, 12);
+		List<Player> test = new ArrayList<Player>(); 
+		test.add(p1);test.add(p2);test.add(p3);test.add(p4);
+		test.add(p5);test.add(p6);test.add(p7);test.add(p8);
+		Tournament t1 = new Tournament("0", test);
+		t1.runTournament();
+		*/
+		Player p1 = new Player("Joueur1", 0, "FRA", "male", 70, 50, 300);
+		Player p2 = new Player("Joueur2", 1, "FRA", "male", 80, 40, 142);
+		Player p3 = new Player("Joueur3", 2, "FRA", "male", 90, 50, 340);
+		Player p4 = new Player("Joueur4", 3, "FRA", "male", 80, 60, 12);
+		Player p5 = new Player("Joueur5", 4, "FRA", "male", 70, 50, 300);
+		Player p6 = new Player("Joueur6", 5, "FRA", "male", 80, 40, 142);
+		Player p7 = new Player("Joueur7", 6, "FRA", "male", 90, 50, 340);
+		Player p8 = new Player("Joueur8", 7, "FRA", "male", 80, 60, 12);
+		List<Player> test = new ArrayList<Player>(); 
+		test.add(p1);test.add(p2);test.add(p3);test.add(p4);
+		test.add(p5);test.add(p6);test.add(p7);test.add(p8);
+		Year y = new Year(2018, test);
+		y.runOpenAus();
 	}
 
 }

@@ -72,24 +72,39 @@ public class Set {
 	public void setFinished(boolean finished) {
 		this.finished = finished;
 	}
-
-	public void run() {
-		System.out.println(this.player1.getName()+" VS "+this.player2.getName());
+	
+	public void runSet() {
 		while(!this.isFinished()) {
 			runPoint();
 		}
 		
 		//Print results
-		System.out.println("	Winner: "+this.winner.getName()+" score "+this.getScorePlayer1()+" to "+this.getScorePlayer2());
+		//System.out.println("	Winner: "+this.winner.getName()+" score "+this.getScorePlayer1()+" to "+this.getScorePlayer2());
 		//System.out.println("--------------------------------------------------------------------");
 	}
+	/*
+	public int[] runSet() {
+		while(!this.isFinished()) {
+			runPoint();
+		}
+		
+		//Print results
+		//System.out.println("score "+this.getScorePlayer1()+" to "+this.getScorePlayer2());
+		
+		//System.out.println("--------------------------------------------------------------------");
+		int[] tmp = new int[2];
+		tmp[0] = this.getScorePlayer1();
+		tmp[1] = this.getScorePlayer2();
+		return tmp;
+	}
+	*/
 	
 	private void runPoint() {
 		//endurance decrease 
 		this.player1.setEndurance(this.player1.getEndurance()-(this.player1.getPower()/100));
 		this.player2.setEndurance(this.player2.getEndurance()-(this.player2.getPower()/100));
 		
-		System.out.println("	endurance P1 "+this.player1.getEndurance()+" P2 "+this.player2.getEndurance());
+		//System.out.println("	endurance P1 "+this.player1.getEndurance()+" P2 "+this.player2.getEndurance());
 		
 		//check concede
 		if(this.player1.getEndurance() <= 0) {
@@ -111,12 +126,12 @@ public class Set {
 		
 		if(valPlayer1 > valPlayer2) {
 			//case 1
-			System.out.println(this.player1.getName()+" wins the point");
+			//System.out.println(this.player1.getName()+" wins the point");
 			this.scorePlayer1 += 1; 
 		}
 		else if(valPlayer1 < valPlayer2) {
 			//case 2
-			System.out.println(this.player2.getName()+" wins the point");
+			//System.out.println(this.player2.getName()+" wins the point");
 			this.scorePlayer2 += 1;
 		}
 		else {
