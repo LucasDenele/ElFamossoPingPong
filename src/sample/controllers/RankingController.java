@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollBar;
+import javafx.stage.Stage;
 
 public class RankingController extends AbstractController{
 
@@ -26,6 +27,7 @@ public class RankingController extends AbstractController{
     public Button countryButton;
     public Button scoreButton;
     public Button genderButton;
+    public Button searchButton;
 
     public void sortByName(ActionEvent actionEvent) {
     }
@@ -50,5 +52,13 @@ public class RankingController extends AbstractController{
 
 
     public void searchLaunch(ActionEvent actionEvent) {
+
+        System.out.println("Launch FriendlyGame");
+        try {
+            sceneSwitcher.uploadNewScene((Stage)searchButton.getScene().getWindow(),"fxml/SearchMenuFXML.fxml",600, 400);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

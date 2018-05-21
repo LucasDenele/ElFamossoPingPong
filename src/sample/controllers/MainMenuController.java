@@ -8,7 +8,7 @@ import sample.SceneSwitcher;
 
 public class MainMenuController {
 
-    SceneSwitcher sceneSwitcher = new SceneSwitcher();
+    private SceneSwitcher sceneSwitcher = new SceneSwitcher();
 
     @FXML
     public Button playFriendlyGameButton;
