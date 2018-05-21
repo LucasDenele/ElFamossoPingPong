@@ -115,8 +115,10 @@ public class Main {
 		List<Player> test = new ArrayList<Player>(); 
 		test.add(p1);test.add(p2);test.add(p3);test.add(p4);
 		test.add(p5);test.add(p6);test.add(p7);test.add(p8);
-		Year y = new Year(2018, test);
-		y.runOpenAus();
+		Year y = new Year(2018);
+		y.runTournament("OpenUS");
+		y.runTournament("OpenUS");
+		y.runYear();
 	}
 
 }

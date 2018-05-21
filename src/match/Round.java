@@ -8,19 +8,16 @@ import player.Player;
 public class Round {
 	//Attributes
 	private int id;
-	private boolean finished;
+	private boolean finished = false;
 	private List<Match> matches = new ArrayList<Match>();
 	private List<Player> players = new ArrayList<Player>();
 	private List<Player> winners = new ArrayList<Player>();
 	private List<Player> playersUpdate = new ArrayList<Player>();
-	private List<String[]> results = new ArrayList<String[]>(); //[name, roundMax, points]
 	
 	//Constructor
-	public Round(int id, List<Player> players/*, List<String[]> allPlayers*/) {
+	public Round(int id, List<Player> players) {
 		this.setId(id);
-		//this.setAllPlayers(allPlayers);
 		this.setPlayers(players);
-		setFinished(false);
 	}
 	
 	//Getters & Setters
@@ -48,12 +45,6 @@ public class Round {
 	public void setPlayersUpdate(List<Player> players) {
 		this.playersUpdate = players;
 	}
-	public List<String[]> getResults() {
-		return results;
-	}
-	public void setResults(List<String[]> results) {
-		this.results = results;
-	}
 	public List<Player> getWinners() {
 		return winners;
 	}
@@ -73,7 +64,8 @@ public class Round {
 		if(players.size()%2 != 0) {
 			System.out.println("Error, number of players is not pair");
 		}
-			
+		
+		//Dispatch players in the matches
 		int tmp = players.size();
 		for(int i = 0; i < tmp/2; i++) {
 			Match newMatch = new Match(this.getId()+i, this.players.remove(0),this.players.remove(0), false);
@@ -82,9 +74,9 @@ public class Round {
 		}
 		
 		while(!allMatchesFinished()) {
-			
+			//Waiting all matches are finished
 		}
-		//System.out.println("READY");
+		//System.out.println("All matches terminated");
 		
 		for(Match m : matches) {
 			
@@ -92,8 +84,7 @@ public class Round {
 			Player tmpP1 = m.getPlayer1();
 			Player tmpP2 = m.getPlayer2();
 			
-			
-						
+			//Update of the players statistics with the round number						
 			if(m.getWinner() == m.getPlayer1()) { //P1 wins
 				tmpP1.setPoints(tmpP1.getPoints()+this.getId()*m.getPointsReceivedPlayer1()/7);
 				tmpP2.setPoints(tmpP2.getPoints()-this.getId()*m.getPointsReceivedPlayer2()/7);
@@ -110,46 +101,6 @@ public class Round {
 		}
 		
 		this.setFinished(true);
-		/*
-		for(Match g :matches) {
-			for(int b =0; b < allPlayers.size(); b++) {
-				String[] tmpPlayer = allPlayers.get(b);
-				
-				if(tmpPlayer[0] == g.getPlayer1().getName()) {
-					
-					if(g.getWinner() == g.getPlayer1()) {
-						tmpPlayer[1] = Integer.toString(this.getId());
-					}
-					double tmpPoints = (this.getId()*g.getPlayer2().getPoints())
-									/(7*g.getPlayer1().getPoints())
-									*Math.abs(g.getScorePlayer1() - g.getScorePlayer2());
-					
-					tmpPlayer[2] = Double.toString(tmpPoints);
-				}
-				else if(tmpPlayer[0] == g.getPlayer2().getName()) {
-					
-					if(g.getWinner() == g.getPlayer2()) {
-						tmpPlayer[1] = Integer.toString(this.getId());
-					}
-					double tmpPoints = (this.getId()*g.getPlayer1().getPoints())
-							/(7*g.getPlayer2().getPoints())
-							*Math.abs(g.getScorePlayer2() - g.getScorePlayer1());
-					
-					tmpPlayer[2] = Double.toString(tmpPoints);
-				}
-				allPlayers.set(b, tmpPlayer);
-			}
-			
-		}
-		*/
-		
-		/*
-		//points win by the winner
-		if(!isFriendly()) {
-				setPointsReceivedPlayer1(this.player2.getPoints()/this.player1.getPoints()*Math.abs(this.getScorePlayer1() - this.getScorePlayer2()));
-				setPointsReceivedPlayer2(this.player1.getPoints()/this.player2.getPoints()*Math.abs(this.getScorePlayer1() - this.getScorePlayer2()));
-		}
-		*/
 		
 	}
 		

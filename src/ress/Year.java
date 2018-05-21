@@ -1,20 +1,17 @@
 package ress;
 
-import java.util.List;
-
 import match.Tournament;
-import player.Player;
 
 public class Year {
 	private boolean finished;
 	private int date;
-	private List<Player> players;
-	private Tournament openAus = new Tournament(null, null);
-	private Tournament openFra = new Tournament(null, null);
-	private Tournament openUS = new Tournament(null, null);
-	private Tournament openChi = new Tournament(null, null);
-	private Tournament openGer = new Tournament(null, null);
-	private Tournament openBra = new Tournament(null, null);
+	private boolean aus = false;
+	private boolean bra = false;
+	private boolean chi = false;
+	private boolean fra = false;
+	private boolean ger = false;
+	private boolean us = false;
+	
 	
 	public boolean isFinished() {
 		return finished;
@@ -31,131 +28,139 @@ public class Year {
 		this.date = date;
 	}
 
-	public Tournament getOpenAus() {
-		return openAus;
+	public boolean isAus() {
+		return aus;
+	}
+	public void setAus(boolean aus) {
+		this.aus = aus;
+	}
+	public boolean isBra() {
+		return bra;
+	}
+	public void setBra(boolean bra) {
+		this.bra = bra;
+	}
+	public boolean isChi() {
+		return chi;
+	}
+	public void setChi(boolean chi) {
+		this.chi = chi;
+	}
+	public boolean isFra() {
+		return fra;
+	}
+	public void setFra(boolean fra) {
+		this.fra = fra;
+	}
+	public boolean isGer() {
+		return ger;
+	}
+	public void setGer(boolean ger) {
+		this.ger = ger;
+	}
+	public boolean isUs() {
+		return us;
+	}
+	public void setUs(boolean us) {
+		this.us = us;
 	}
 
-	public void setOpenAus(Tournament openAustralia) {
-		this.openAus = openAustralia;
-	}
-
-	public Tournament getOpenFra() {
-		return openFra;
-	}
-
-	public void setOpenFra(Tournament openFrance) {
-		this.openFra = openFrance;
-	}
-
-	public Tournament getOpenUS() {
-		return openUS;
-	}
-
-	public void setOpenUS(Tournament openUS) {
-		this.openUS = openUS;
-	}
-
-	public Tournament getOpenChi() {
-		return openChi;
-	}
-
-	public void setOpenChi(Tournament openChina) {
-		this.openChi = openChina;
-	}
-
-	public Tournament getOpenGer() {
-		return openGer;
-	}
-
-	public void setOpenGer(Tournament openGermany) {
-		this.openGer = openGermany;
-	}
-
-	public Tournament getOpenBra() {
-		return openBra;
-	}
-
-	public void setOpenBra(Tournament openBrasil) {
-		this.openBra = openBrasil;
-	}
-
-	public List<Player> getPlayers() {
-		return players;
-	}
-	public void setPlayers(List<Player> players) {
-		this.players = players;
-	}
-	public Year(int date, List<Player> players) {
+	public Year(int date) {
 		this.setDate(date);
-		this.setPlayers(players);
 	}
 	
 	public void runYear() {
-		runOpenAus();
-		runOpenBra();
-		runOpenChi();
-		runOpenFra();
-		runOpenGer();
-		runOpenUS();
+		runTournament("OpenAus");
+		runTournament("OpenBra");
+		runTournament("OpenChi");
+		runTournament("OpenFra");
+		runTournament("OpenGer");
+		runTournament("OpenUS");
+		
 	}
 	
-	public void runOpenAus() {
-		if(this.openAus.isFinished()) {
-			System.out.println("L'Open d'Australie "+this.getDate()+" est termine");
+	public void runTournament(String name) {
+		if(aus && bra && chi && fra && ger && us) {
+			setFinished(true);
+		}
+		
+		if(!isFinished()) {
+					
+			switch(name) {
+			case "OpenAus":
+				if(aus) {
+					System.out.println("Australian Open "+this.getDate()+" is passed");
+				}
+				else {
+					Tournament currentTournament = new Tournament();
+					currentTournament.run("OpenAus");
+					aus = true;
+				}
+				break;
+				
+			case "OpenBra":
+				if(bra) {
+					System.out.println("Brasilian Open "+this.getDate()+" is passed");
+				}
+				else {
+					Tournament currentTournament = new Tournament();
+					currentTournament.run("OpenBra");
+					bra = true;
+				}
+				break;
+				
+			case "OpenChi":
+				if(chi) {
+					System.out.println("Chinese Open "+this.getDate()+" is passed");
+				}
+				else {
+					Tournament currentTournament = new Tournament();
+					currentTournament.run("OpenChi");
+					chi = true;
+				}
+				break;
+				
+			case "OpenFra":
+				if(fra) {
+					System.out.println("French Open "+this.getDate()+" is passed");
+				}
+				else {
+					Tournament currentTournament = new Tournament();
+					currentTournament.run("OpenFra");
+					fra = true;
+				}
+				break;
+				
+			case "OpenGer":
+				if(ger) {
+					System.out.println("German Open"+this.getDate()+" is passed");
+				}
+				else {
+					Tournament currentTournament = new Tournament();
+					currentTournament.run("OpenGer");
+					ger = true;
+				}
+				break;
+				
+			case "OpenUS":
+				if(us) {
+					System.out.println("US Open "+this.getDate()+" is passed");
+				}
+				else {
+					Tournament currentTournament = new Tournament();
+					currentTournament.run("OpenUS");
+					us = true;
+				}
+				break;
+			
+			default:
+				System.out.println("Ce tournoi n'est pas simule ici");
+				break;
+			}
 		}
 		else {
-			this.setOpenAus(new Tournament("Australian Open "+this.getDate(), players));
-			this.openAus.runTournament();
+			System.out.println("Year is passed");
 		}
 	}
 	
-	public void runOpenBra() {
-		if(this.openBra.isFinished()) {
-			System.out.println("L'Open du Bresil "+this.getDate()+" est termine");
-		}
-		else {
-			this.setOpenBra(new Tournament("Brasil Open "+this.getDate(), players));
-			this.openBra.runTournament();
-		}
-	}
-	
-	public void runOpenChi() {
-		if(this.openChi.isFinished()) {
-			System.out.println("L'Open de Chine "+this.getDate()+" est termine");
-		}
-		else {
-			this.setOpenChi(new Tournament("China Open "+this.getDate(), players));
-			this.openChi.runTournament();
-		}
-	}
-	
-	public void runOpenFra() {
-		if(this.openFra.isFinished()) {
-			System.out.println("L'Open de France "+this.getDate()+" est termine");
-		}
-		else {
-			this.setOpenFra(new Tournament("France Open "+this.getDate(), players));
-			this.openFra.runTournament();
-		}
-	}
-	
-	public void runOpenGer() {
-		if(this.openGer.isFinished()) {
-			System.out.println("L'Open d'Allemagne "+this.getDate()+" est termine");
-		}
-		else {
-			this.setOpenGer(new Tournament("Germany Open "+this.getDate(), players));
-			this.openGer.runTournament();
-		}
-	}
-	
-	public void runOpenUS() {
-		if(this.openUS.isFinished()) {
-			System.out.println("L'US Open "+this.getDate()+" est termine");
-		}
-		else {
-			this.setOpenUS(new Tournament("US Open "+this.getDate(), players));
-			this.openUS.runTournament();
-		}
-	}
 }
