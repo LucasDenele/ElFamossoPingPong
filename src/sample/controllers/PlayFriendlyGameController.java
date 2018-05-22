@@ -1,11 +1,16 @@
 package sample.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.ScrollEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import match.Match;
 import player.Player;
 
@@ -39,6 +44,7 @@ public class PlayFriendlyGameController extends AbstractController{
 
     private int nomberOfSelectedPlayers = 0;
     List<Player> test = new ArrayList<Player>();
+    Match frendlyMatch = new Match();
 
 
     public void initialize(){
@@ -85,10 +91,11 @@ public class PlayFriendlyGameController extends AbstractController{
         listViewsScrollBar.setMax(test.size()-8);
     }
 
-    public void launchFrendlyGame(ActionEvent actionEvent) {
+    public void launchFrendlyGame(ActionEvent actionEvent){
         if(nomberOfSelectedPlayers != 2){
             warningLabel.setText("Warning : you must select two players!");
         }else{
+            warningLabel.setText("");
             int idPlayerA = -1;
             int idPlayerB = -1;
             int i = 0;
@@ -100,17 +107,40 @@ public class PlayFriendlyGameController extends AbstractController{
                     }else{
                         idPlayerB = i;
                     }
-                    i++;
                 }
+                i++;
             }
 
-            Match frendlyMatch = new Match(1, test.get(idPlayerA), test.get(idPlayerB), true);
-            frendlyMatch.start();
-            while(!frendlyMatch.isFinished()){};
-            System.out.println("Winner :"+frendlyMatch.getWinner().getName());
-            System.out.println("-----------------");
+            System.out.println("id A : "+idPlayerA);
+            System.out.println("id B : "+idPlayerB);
+
+            frendlyMatch.setPlayer1(test.get(idPlayerA));
+            frendlyMatch.setPlayer2(test.get(idPlayerB));
+
+            frendlyMatch.run();
+
+            while(!frendlyMatch.isFinished());
+
+            Stage resultStage = new Stage();
+            try {
+                startResultWindow(resultStage, (Stage) launchButton.getScene().getWindow());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            frendlyMatch.setFinished(false);
 
         }
+    }
+
+    public void startResultWindow(Stage window, Stage parentStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/ResultSceneFXML.fxml"));
+        Scene scene =  new Scene(root, 200 ,200);
+
+        window.initModality(Modality.WINDOW_MODAL);
+        window.initOwner(parentStage);
+        window.setScene(scene);
+        window.show();
     }
 
     public void launchSearch(ActionEvent actionEvent) {
