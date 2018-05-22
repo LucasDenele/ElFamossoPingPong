@@ -25,6 +25,7 @@ public class Match extends Thread{
 	
 	//Constructor
 	public Match(){}
+
 	public Match(int id, Player playerA, Player playerB, boolean friendly) {
 		this.setId(id);
 		this.setPlayerA(playerA);

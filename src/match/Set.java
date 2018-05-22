@@ -86,7 +86,7 @@ public class Set {
 		//endurance decrease 
 		this.playerA.setEndurance(this.playerA.getEndurance()-(this.playerA.getPower()/100));
 		this.playerB.setEndurance(this.playerB.getEndurance()-(this.playerB.getPower()/100));
-		
+
 		//check concede
 		if(this.playerA.getEndurance() <= 0) {
 			this.setConcede(true);
