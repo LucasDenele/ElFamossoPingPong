@@ -6,47 +6,47 @@ public class Set {
 	
 	//Attributes
 	private int id;
-	private Player player1;
-	private Player player2;
-	private int scorePlayer1;
-	private int scorePlayer2;
+	private Player playerA;
+	private Player playerB;
+	private int scorePlayerA;
+	private int scorePlayerB;
 	private boolean finished;
 	private Player winner;
 	private boolean concede;
 	
 	//Constructor
-	public Set(int id, Player player1, Player player2) {
+	public Set(int id, Player playerA, Player playerB) {
 		this.setId(id);
-		this.setPlayer1(player1);
-		this.setPlayer2(player2);
+		this.setPlayerA(playerA);
+		this.setPlayerB(playerB);
 		this.setConcede(false);
 		this.setFinished(false);
 	}
 
 	//Getters & Setters
-	public Player getPlayer1() {
-		return player1;
+	public Player getPlayerA() {
+		return playerA;
 	}
-	public void setPlayer1(Player player1) {
-		this.player1 = player1;
+	public void setPlayerA(Player playerA) {
+		this.playerA = playerA;
 	}
-	public Player getPlayer2() {
-		return player2;
+	public Player getPlayerB() {
+		return playerB;
 	}
-	public void setPlayer2(Player player2) {
-		this.player2 = player2;
+	public void setPlayerB(Player playerB) {
+		this.playerB = playerB;
 	}
-	public int getScorePlayer1() {
-		return scorePlayer1;
+	public int getScorePlayerA() {
+		return scorePlayerA;
 	}
-	public void setScorePlayer1(int scorePlayer1) {
-		this.scorePlayer1 = scorePlayer1;
+	public void setScorePlayerA(int scorePlayerA) {
+		this.scorePlayerA = scorePlayerA;
 	}
-	public int getScorePlayer2() {
-		return scorePlayer2;
+	public int getScorePlayerB() {
+		return scorePlayerB;
 	}
-	public void setScorePlayer2(int scorePlayer2) {
-		this.scorePlayer2 = scorePlayer2;
+	public void setScorePlayerB(int scorePlayerB) {
+		this.scorePlayerB = scorePlayerB;
 	}
 	public Player getWinner() {
 		return winner;
@@ -82,36 +82,36 @@ public class Set {
 	
 	private void runPoint() {
 		//endurance decrease 
-		this.player1.setEndurance(this.player1.getEndurance()-(this.player1.getPower()/100));
-		this.player2.setEndurance(this.player2.getEndurance()-(this.player2.getPower()/100));
+		this.playerA.setEndurance(this.playerA.getEndurance()-(this.playerA.getPower()/100));
+		this.playerB.setEndurance(this.playerB.getEndurance()-(this.playerB.getPower()/100));
 		
 		//check concede
-		if(this.player1.getEndurance() <= 0) {
+		if(this.playerA.getEndurance() <= 0) {
 			this.setConcede(true);
 			this.setFinished(true);
-			this.setWinner(this.player2);
-			System.out.println("P1 has conceded");
+			this.setWinner(this.playerB);
+			System.out.println("PA has conceded");
 		}
-		if(this.player2.getEndurance() <= 0) {
+		if(this.playerB.getEndurance() <= 0) {
 			this.setConcede(true);
 			this.setFinished(true);
-			this.setWinner(this.player1);
-			System.out.println("P2 has conceded");
+			this.setWinner(this.playerA);
+			System.out.println("PB has conceded");
 		}
 		
 		//Calculate who wins the point
-		float valPlayer1 = this.player1.getPower()/(100-this.player1.getEndurance())*randInt();
-		float valPlayer2 = this.player2.getPower()/(100-this.player2.getEndurance())*randInt();
+		float valPlayerA = this.playerA.getPower()/(100-this.playerA.getEndurance())*randInt();
+		float valPlayerB = this.playerB.getPower()/(100-this.playerB.getEndurance())*randInt();
 		
-		if(valPlayer1 > valPlayer2) {
+		if(valPlayerA > valPlayerB) {
 			//case 1
 			//System.out.println(this.player1.getName()+" wins the point");
-			this.scorePlayer1 += 1; 
+			this.scorePlayerA += 1; 
 		}
-		else if(valPlayer1 < valPlayer2) {
+		else if(valPlayerA < valPlayerB) {
 			//case 2
 			//System.out.println(this.player2.getName()+" wins the point");
-			this.scorePlayer2 += 1;
+			this.scorePlayerB += 1;
 		}
 		else {
 			System.out.println("No body wins the point");
@@ -119,14 +119,14 @@ public class Set {
 		
 		//Winner conditions
 		//P1 Wins the set
-		if(this.scorePlayer1 > 3 && this.scorePlayer1 - this.scorePlayer2 >= 2) {
+		if(this.scorePlayerA > 3 && this.scorePlayerA - this.scorePlayerB >= 2) {
 			this.setFinished(true);
-			this.setWinner(player1);
+			this.setWinner(playerA);
 		}
 		//P2 Wins the set
-		else if(this.scorePlayer2 > 3 && this.scorePlayer2 - this.scorePlayer1 >= 2) {
+		else if(this.scorePlayerB > 3 && this.scorePlayerB - this.scorePlayerA >= 2) {
 			this.setFinished(true);
-			this.setWinner(player2);
+			this.setWinner(playerB);
 		}
 	}
 	

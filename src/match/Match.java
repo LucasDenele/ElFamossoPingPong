@@ -9,22 +9,22 @@ public class Match extends Thread{
 	
 	//Attributes
 	private int id;
-	private Player player1;
-	private Player player2;
+	private Player playerA;
+	private Player playerB;
 	private Player winner;
 	private boolean finished;
 	private boolean friendly;
-	private int scorePlayer1;
-	private int scorePlayer2;
-	private double pointsReceivedPlayer1;
-	private double pointsReceivedPlayer2;
+	private int scorePlayerA;
+	private int scorePlayerB;
+	private double pointsReceivedPlayerA;
+	private double pointsReceivedPlayerB;
 	private List<Set> sets = new ArrayList<Set>();
 	
 	//Constructor
-	public Match(int id, Player player1, Player player2, boolean friendly) {
+	public Match(int id, Player playerA, Player playerB, boolean friendly) {
 		this.setId(id);
-		this.setPlayer1(player1);
-		this.setPlayer2(player2);
+		this.setPlayerA(playerA);
+		this.setPlayerB(playerB);
 		this.setFinished(false);
 		this.setFriendly(friendly);
 	}
@@ -36,17 +36,17 @@ public class Match extends Thread{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Player getPlayer1() {
-		return player1;
+	public Player getPlayerA() {
+		return playerA;
 	}
-	public void setPlayer1(Player player1) {
-		this.player1 = player1;
+	public void setPlayerA(Player playerA) {
+		this.playerA = playerA;
 	}
-	public Player getPlayer2() {
-		return player2;
+	public Player getPlayerB() {
+		return playerB;
 	}
-	public void setPlayer2(Player player2) {
-		this.player2 = player2;
+	public void setPlayerB(Player playerB) {
+		this.playerB = playerB;
 	}
 	public Player getWinner() {
 		return winner;
@@ -54,17 +54,17 @@ public class Match extends Thread{
 	public void setWinner(Player winner) {
 		this.winner = winner;
 	}
-	public int getScorePlayer1() {
-		return scorePlayer1;
+	public int getScorePlayerA() {
+		return scorePlayerA;
 	}
-	public void setScorePlayer1(int scorePlayer1) {
-		this.scorePlayer1 = scorePlayer1;
+	public void setScorePlayerA(int scorePlayerA) {
+		this.scorePlayerA = scorePlayerA;
 	}
-	public int getScorePlayer2() {
-		return scorePlayer2;
+	public int getScorePlayerB() {
+		return scorePlayerB;
 	}
-	public void setScorePlayer2(int scorePlayer2) {
-		this.scorePlayer2 = scorePlayer2;
+	public void setScorePlayerB(int scorePlayerB) {
+		this.scorePlayerB = scorePlayerB;
 	}
 	public List<Set> getSets() {
 		return sets;
@@ -84,17 +84,17 @@ public class Match extends Thread{
 	public void setFriendly(boolean friendly) {
 		this.friendly = friendly;
 	}
-	public double getPointsReceivedPlayer1() {
-		return pointsReceivedPlayer1;
+	public double getPointsReceivedPlayerA() {
+		return pointsReceivedPlayerA;
 	}
-	public void setPointsReceivedPlayer1(double pointsReceivedPlayer1) {
-		this.pointsReceivedPlayer1 = pointsReceivedPlayer1;
+	public void setPointsReceivedPlayerA(double pointsReceivedPlayerA) {
+		this.pointsReceivedPlayerA = pointsReceivedPlayerA;
 	}
-	public double getPointsReceivedPlayer2() {
-		return pointsReceivedPlayer2;
+	public double getPointsReceivedPlayerB() {
+		return pointsReceivedPlayerB;
 	}
-	public void setPointsReceivedPlayer2(double pointsReceivedPlayer2) {
-		this.pointsReceivedPlayer2 = pointsReceivedPlayer2;
+	public void setPointsReceivedPlayerB(double pointsReceivedPlayerB) {
+		this.pointsReceivedPlayerB = pointsReceivedPlayerB;
 	}
 
 	@Override
@@ -108,10 +108,10 @@ public class Match extends Thread{
 		
 		if(!isFriendly()) {
 			//Player 1
-			this.setPointsReceivedPlayer1(this.player2.getPoints()/this.player1.getPoints()*Math.abs(this.getScorePlayer1() - this.getScorePlayer2()));
+			this.setPointsReceivedPlayerA(this.playerB.getPoints()/this.playerA.getPoints()*Math.abs(this.getScorePlayerA() - this.getScorePlayerB()));
 			//System.out.println("Match "+this.getId()+" - ReceivedP1 :"+this.getPointsReceivedPlayer1());
 			//player 2
-			this.setPointsReceivedPlayer2(this.player1.getPoints()/this.player2.getPoints()*Math.abs(this.getScorePlayer1() - this.getScorePlayer2()));
+			this.setPointsReceivedPlayerB(this.playerA.getPoints()/this.playerB.getPoints()*Math.abs(this.getScorePlayerA() - this.getScorePlayerB()));
 			//System.out.println("Match "+this.getId()+" - ReceivedP2 :"+this.getPointsReceivedPlayer2());
 	}
 		
@@ -119,18 +119,18 @@ public class Match extends Thread{
 	}
 	
 	public void newSet(int id) {
-		Set currentSet = new Set(id, this.player1, this.player2);
+		Set currentSet = new Set(id, this.playerA, this.playerB);
 		
 		currentSet.runSet();
 		
 		//check who is the winner of the current set
-		if(currentSet.getWinner() == this.player1) {
+		if(currentSet.getWinner() == this.playerA) {
 			//System.out.println(this.player1.getName()+" wins the set");
-			this.scorePlayer1 += 1; 
+			this.scorePlayerA += 1; 
 		}
-		else if(currentSet.getWinner() == this.player2) {
+		else if(currentSet.getWinner() == this.playerB) {
 			//System.out.println(this.player2.getName()+" wins the set");
-			this.scorePlayer2 += 1; 
+			this.scorePlayerB += 1; 
 		}
 		else {
 			System.out.println("No body wins the set");
@@ -143,13 +143,13 @@ public class Match extends Thread{
 		
 		//Winner conditions
 		//P1 Wins the game
-		if(this.scorePlayer1 > 2 && this.scorePlayer1 - this.scorePlayer2 >= 2) {
-			this.setWinner(player1);
+		if(this.scorePlayerA > 2 && this.scorePlayerA - this.scorePlayerB >= 2) {
+			this.setWinner(playerA);
 			this.setFinished(true);
 		}
 		//P2 Wins the game
-		else if(this.scorePlayer2 > 2 && this.scorePlayer2 - this.scorePlayer1 >= 2) {
-			this.setWinner(player2);
+		else if(this.scorePlayerB > 2 && this.scorePlayerB - this.scorePlayerA >= 2) {
+			this.setWinner(playerB);
 			this.setFinished(true);
 		}
 		
