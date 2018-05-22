@@ -68,6 +68,7 @@ public class Year {
 	public Year(int date) {
 		this.setDate(date);
 	}
+	public Year(){}
 	
 	public void runYear() {
 		runTournament("OpenAus");

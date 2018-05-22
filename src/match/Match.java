@@ -196,11 +196,11 @@ public class Match extends Thread{
 	public void checkWinner(){
 		//check who is the winner of the current set
 		if(currentSet.getWinner() == this.playerA) {
-			System.out.println(this.playerA.getLastName()+" wins the set");
+			//System.out.println(this.playerA.getLastName()+" wins the set");
 			this.scorePlayerA += 1;
 		}
 		else if(currentSet.getWinner() == this.playerB) {
-			System.out.println(this.playerB.getLastName()+" wins the set");
+			//System.out.println(this.playerB.getLastName()+" wins the set");
 			this.scorePlayerB += 1;
 		}
 		else {
