@@ -21,6 +21,8 @@ public class Set {
 		this.setPlayerB(playerB);
 		this.setConcede(false);
 		this.setFinished(false);
+		this.setScorePlayerA(0);
+		this.setScorePlayerB(0);
 	}
 
 	//Getters & Setters
@@ -80,7 +82,7 @@ public class Set {
 		}
 	}
 	
-	private void runPoint() {
+	public void runPoint() {
 		//endurance decrease 
 		this.playerA.setEndurance(this.playerA.getEndurance()-(this.playerA.getPower()/100));
 		this.playerB.setEndurance(this.playerB.getEndurance()-(this.playerB.getPower()/100));
@@ -105,13 +107,13 @@ public class Set {
 		
 		if(valPlayerA > valPlayerB) {
 			//case 1
-			//System.out.println(this.player1.getName()+" wins the point");
-			this.scorePlayerA += 1; 
+			this.scorePlayerA += 1;
+			//System.out.println("A: "+this.scorePlayerA);
 		}
 		else if(valPlayerA < valPlayerB) {
 			//case 2
-			//System.out.println(this.player2.getName()+" wins the point");
 			this.scorePlayerB += 1;
+			//System.out.println("B: "+this.scorePlayerB);
 		}
 		else {
 			System.out.println("No body wins the point");
@@ -120,13 +122,13 @@ public class Set {
 		//Winner conditions
 		//P1 Wins the set
 		if(this.scorePlayerA > 3 && this.scorePlayerA - this.scorePlayerB >= 2) {
-			this.setFinished(true);
 			this.setWinner(playerA);
+			this.setFinished(true);
 		}
 		//P2 Wins the set
 		else if(this.scorePlayerB > 3 && this.scorePlayerB - this.scorePlayerA >= 2) {
-			this.setFinished(true);
 			this.setWinner(playerB);
+			this.setFinished(true);
 		}
 	}
 	
