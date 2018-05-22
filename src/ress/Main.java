@@ -9,6 +9,7 @@ import match.Round;
 import match.Set;
 import match.Tournament;
 import player.Player;
+import match.Year;
 
 public class Main {
 	public static void main(String[] args) {
@@ -117,9 +118,11 @@ public class Main {
 		test.add(p1);test.add(p2);test.add(p3);test.add(p4);
 		test.add(p5);test.add(p6);test.add(p7);test.add(p8);
 		Year y = new Year(2018);
-		y.runTournament("OpenUS");
+		Match m = new Match(0, p7, p8, true);
+		m.run();
 		//y.runTournament("OpenUS");
-		y.runYear();
+		//y.runTournament("OpenUS");
+		//y.runYear();
 	}
 
 }

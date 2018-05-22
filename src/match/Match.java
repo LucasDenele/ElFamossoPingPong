@@ -19,6 +19,7 @@ public class Match extends Thread{
 	private double pointsReceivedPlayerA;
 	private double pointsReceivedPlayerB;
 	private List<Set> sets = new ArrayList<Set>();
+	private List<String> results = new ArrayList<String>();
 	
 	//Constructor
 	public Match(int id, Player playerA, Player playerB, boolean friendly) {
@@ -96,6 +97,12 @@ public class Match extends Thread{
 	public void setPointsReceivedPlayerB(double pointsReceivedPlayerB) {
 		this.pointsReceivedPlayerB = pointsReceivedPlayerB;
 	}
+	public List<String> getResults() {
+		return results;
+	}
+	public void setResults(List<String> results) {
+		this.results = results;
+	}
 
 	@Override
 	public void run() {
@@ -114,7 +121,11 @@ public class Match extends Thread{
 			this.setPointsReceivedPlayerB(this.playerA.getPoints()/this.playerB.getPoints()*Math.abs(this.getScorePlayerA() - this.getScorePlayerB()));
 			//System.out.println("Match "+this.getId()+" - ReceivedP2 :"+this.getPointsReceivedPlayer2());
 	}
-		
+		/*
+		for(String s : this.results) {
+			System.out.print(s);
+		}
+		*/
 		//System.out.println("				Results Match "+this.getId()+"  Winner "+this.getWinner().getName()+" : "+this.getScorePlayer1()+" to "+this.getScorePlayer2());
 	}
 	
@@ -140,6 +151,8 @@ public class Match extends Thread{
 		if(currentSet.isConcede()) {
 			this.setFinished(true);
 		}
+		
+		this.results.add(currentSet.getScorePlayerA()+"-"+currentSet.getScorePlayerB());	
 		
 		//Winner conditions
 		//P1 Wins the game

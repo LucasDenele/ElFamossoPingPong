@@ -73,9 +73,8 @@ public class Round {
 			newMatch.start();
 		}
 		
-		while(!allMatchesFinished()) {
+		while(!allMatchesFinished());
 			//Waiting all matches are finished
-		}
 		//System.out.println("All matches terminated");
 		
 		for(Match m : matches) {
