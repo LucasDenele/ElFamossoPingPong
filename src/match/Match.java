@@ -1,7 +1,6 @@
 package match;
 
 import player.Player;
-import ress.MatchSave;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +19,6 @@ public class Match extends Thread{
 	private double pointsReceivedPlayer1;
 	private double pointsReceivedPlayer2;
 	private List<Set> sets = new ArrayList<Set>();
-	private List<int[]> results = new ArrayList<int[]>();
-	private MatchSave save;
 	
 	//Constructor
 	public Match(int id, Player player1, Player player2, boolean friendly) {
@@ -30,7 +27,6 @@ public class Match extends Thread{
 		this.setPlayer2(player2);
 		this.setFinished(false);
 		this.setFriendly(friendly);
-		this.setSave(new MatchSave(id, player1, player2));
 	}
 	
 	//Getters & Setters
@@ -88,21 +84,17 @@ public class Match extends Thread{
 	public void setFriendly(boolean friendly) {
 		this.friendly = friendly;
 	}
-
 	public double getPointsReceivedPlayer1() {
 		return pointsReceivedPlayer1;
 	}
-
 	public void setPointsReceivedPlayer1(double pointsReceivedPlayer1) {
 		this.pointsReceivedPlayer1 = pointsReceivedPlayer1;
 	}
-
-	public MatchSave getSave() {
-		return save;
+	public double getPointsReceivedPlayer2() {
+		return pointsReceivedPlayer2;
 	}
-
-	public void setSave(MatchSave save) {
-		this.save = save;
+	public void setPointsReceivedPlayer2(double pointsReceivedPlayer2) {
+		this.pointsReceivedPlayer2 = pointsReceivedPlayer2;
 	}
 
 	@Override
@@ -123,13 +115,6 @@ public class Match extends Thread{
 			//System.out.println("Match "+this.getId()+" - ReceivedP2 :"+this.getPointsReceivedPlayer2());
 	}
 		
-		//print of the results
-		for(int[] s : results) {
-			//System.out.print(" ["+s[0]+", "+s[1]+"]");
-		}
-		//System.out.println();
-		//System.out.print("	ID Game : "+this.getId());
-		//System.out.println(" Winner game : "+this.getWinner().getName()+" "+this.getScorePlayer1()+" to "+this.getScorePlayer2());
 		System.out.println("Results Match "+this.getId()+"  Winner "+this.getWinner().getName()+" : "+this.getScorePlayer1()+" to "+this.getScorePlayer2());
 	}
 	
@@ -137,7 +122,6 @@ public class Match extends Thread{
 		Set currentSet = new Set(id, this.player1, this.player2);
 		
 		currentSet.runSet();
-		//System.out.println("Set : "+tmp[0]+" "+tmp[1]);
 		
 		//check who is the winner of the current set
 		if(currentSet.getWinner() == this.player1) {
@@ -169,60 +153,7 @@ public class Match extends Thread{
 			this.setWinner(player2);
 		}
 		
-		//System.out.println("____________________________________________________________");
 		sets.add(currentSet);
-		
-		//Updating save
-		//this.save.addResults(currentSet);
 	}
 	
-	/*
-	public void newSet(int id) {
-		Set currentSet = new Set(id, this.player1, this.player2);
-		
-		int[] tmp = currentSet.runSet();
-		System.out.println("Game : "+this.getId()+" Set : "+tmp[0]+" "+tmp[1]);
-		
-		this.results.add(tmp);
-		//check who is the winner of the current set
-		if(tmp[0] > tmp[1]) {
-			//System.out.println(this.player1.getName()+" wins the set");
-			this.scorePlayer1 += 1; 
-		}
-		else if(tmp[0] < tmp[1]) {
-			//System.out.println(this.player2.getName()+" wins the set");
-			this.scorePlayer2 += 1; 
-		}
-		else {
-			System.out.println("No body wins the set");
-		}
-		
-		//Case if a player has endurance = 0
-		if(currentSet.isConcede()) {
-			this.setFinished(true);
-		}
-		
-		//Winner conditions
-		//P1 Wins the game
-		if(this.scorePlayer1 > 2 && this.scorePlayer1 - this.scorePlayer2 >= 2) {
-			this.setFinished(true);
-			this.setWinner(player1);
-		}
-		//P2 Wins the game
-		else if(this.scorePlayer2 > 2 && this.scorePlayer2 - this.scorePlayer1 >= 2) {
-			this.setFinished(true);
-			this.setWinner(player2);
-		}
-		
-		System.out.println("____________________________________________________________");
-		sets.add(currentSet);
-	}
-	*/
-	public double getPointsReceivedPlayer2() {
-		return pointsReceivedPlayer2;
-	}
-
-	public void setPointsReceivedPlayer2(double pointsReceivedPlayer2) {
-		this.pointsReceivedPlayer2 = pointsReceivedPlayer2;
-	}
 }
