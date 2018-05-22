@@ -123,15 +123,12 @@ public class Match extends Thread{
 			this.setPointsReceivedPlayerB(this.playerA.getPoints()/this.playerB.getPoints()*Math.abs(this.getScorePlayerA() - this.getScorePlayerB()));
 			//System.out.println("Match "+this.getId()+" - ReceivedP2 :"+this.getPointsReceivedPlayer2());
 	}
-<<<<<<< HEAD
-		
-=======
+
 		/*
 		for(String s : this.results) {
 			System.out.print(s);
 		}
 		*/
->>>>>>> 2030774fe52ef4637ff8ce183c899de2c58ba341
 		//System.out.println("				Results Match "+this.getId()+"  Winner "+this.getWinner().getName()+" : "+this.getScorePlayer1()+" to "+this.getScorePlayer2());
 	}
 	
