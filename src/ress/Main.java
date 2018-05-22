@@ -119,7 +119,7 @@ public class Main {
 		Year y = new Year(2018);
 		y.runTournament("OpenUS");
 		y.runTournament("OpenUS");
-		y.runYear();
+		//y.runYear();
 	}
 
 }
