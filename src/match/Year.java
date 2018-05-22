@@ -1,4 +1,4 @@
-package ress;
+package match;
 
 import match.Tournament;
 

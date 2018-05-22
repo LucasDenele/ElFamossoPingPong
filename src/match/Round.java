@@ -59,7 +59,7 @@ public class Round {
 	}
 	
 	public void runRound() {
-		System.out.println("			R"+this.getId());
+		//System.out.println("			R"+this.getId());
 		
 		if(players.size()%2 != 0) {
 			System.out.println("Error, number of players is not pair");
@@ -73,38 +73,37 @@ public class Round {
 			newMatch.start();
 		}
 		
-		while(!allMatchesFinished()) {
+		while(!allMatchesFinished());
 			//Waiting all matches are finished
-		}
 		//System.out.println("All matches terminated");
 		
 		for(Match m : matches) {
 			
 			Player tmpWinner = m.getWinner();
-			Player tmpP1 = m.getPlayer1();
-			Player tmpP2 = m.getPlayer2();
+			Player tmpPA = m.getPlayerA();
+			Player tmpPB = m.getPlayerB();
 			
 			//Update of the players statistics with the round number						
-			if(m.getWinner() == m.getPlayer1()) { //P1 wins
-				System.out.println("R"+this.getId()+" M"+m.getId()+" Before P1 "+tmpP1.getPoints());
-				System.out.println("P1 Rcv "+(this.getId()+1)*m.getPointsReceivedPlayer1()/7);
-				System.out.println("P2 Rcv "+(this.getId()+1)*m.getPointsReceivedPlayer2()/7);
-				tmpP1.setPoints(tmpP1.getPoints()+(this.getId()+1)*m.getPointsReceivedPlayer1()/7);
-				tmpP2.setPoints(tmpP2.getPoints()-(this.getId()+1)*m.getPointsReceivedPlayer2()/7);
-				tmpWinner.setPoints(tmpP1.getPoints());
-				System.out.println("R"+this.getId()+" M"+m.getId()+" After P1 "+tmpP1.getPoints());
+			if(m.getWinner() == m.getPlayerA()) { //P1 wins
+				//System.out.println("R"+this.getId()+" M"+m.getId()+" Before P1 "+tmpP1.getPoints());
+				//System.out.println("P1 Rcv "+(this.getId()+1)*m.getPointsReceivedPlayer1()/7);
+				//System.out.println("P2 Rcv "+(this.getId()+1)*m.getPointsReceivedPlayer2()/7);
+				tmpPA.setPoints(tmpPA.getPoints()+(this.getId()+1)*m.getPointsReceivedPlayerA()/7);
+				tmpPB.setPoints(tmpPB.getPoints()-(this.getId()+1)*m.getPointsReceivedPlayerB()/7);
+				tmpWinner.setPoints(tmpPA.getPoints());
+				//System.out.println("R"+this.getId()+" M"+m.getId()+" After P1 "+tmpP1.getPoints());
 			}
-			else if(m.getWinner() == m.getPlayer2()) { //P2 wins
-				System.out.println("R"+this.getId()+" M"+m.getId()+" Before P2 "+tmpP2.getPoints());
-				System.out.println("P1 Rcv "+(this.getId()+1)*m.getPointsReceivedPlayer1()/7);
-				System.out.println("P2 Rcv "+(this.getId()+1)*m.getPointsReceivedPlayer2()/7);
-				tmpP1.setPoints(tmpP1.getPoints()-(this.getId()+1)*m.getPointsReceivedPlayer1()/7);
-				tmpP2.setPoints(tmpP2.getPoints()+(this.getId()+1)*m.getPointsReceivedPlayer2()/7);
-				tmpWinner.setPoints(tmpP2.getPoints());
-				System.out.println("R"+this.getId()+" M"+m.getId()+" After P2 "+tmpP2.getPoints());
+			else if(m.getWinner() == m.getPlayerB()) { //P2 wins
+				//System.out.println("R"+this.getId()+" M"+m.getId()+" Before P2 "+tmpP2.getPoints());
+				//System.out.println("P1 Rcv "+(this.getId()+1)*m.getPointsReceivedPlayer1()/7);
+				//System.out.println("P2 Rcv "+(this.getId()+1)*m.getPointsReceivedPlayer2()/7);
+				tmpPA.setPoints(tmpPA.getPoints()-(this.getId()+1)*m.getPointsReceivedPlayerA()/7);
+				tmpPB.setPoints(tmpPB.getPoints()+(this.getId()+1)*m.getPointsReceivedPlayerB()/7);
+				tmpWinner.setPoints(tmpPB.getPoints());
+				//System.out.println("R"+this.getId()+" M"+m.getId()+" After P2 "+tmpP2.getPoints());
 			}
-			this.playersUpdate.add(tmpP1);
-			this.playersUpdate.add(tmpP2);
+			this.playersUpdate.add(tmpPA);
+			this.playersUpdate.add(tmpPB);
 			this.winners.add(tmpWinner);
 		}
 		
