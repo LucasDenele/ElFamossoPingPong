@@ -37,23 +37,28 @@ public class PlayFriendlyGameController extends SearchController {
         sortLists("select * from PLAYER");
     }
 
-    public void launchFrendlyGame(ActionEvent actionEvent){
+    public void launchFrendlyGame(ActionEvent actionEvent) throws InterruptedException {
         if(nomberOfSelectedPlayers != 2){
             warningLabel.setText("Warning : you must select two players!");
         }else{
             warningLabel.setText("");
 
-
+            rankingAccessBDD.request("select * from PLAYER where " +
+                    "FIRST_NAME = '"+playerB.substring(0,playerB.indexOf(" "))+
+                    "' && LAST_NAME = '"+playerB.substring(playerB.indexOf(" ")+1, playerB.length())+"'").get(0).display();
             frendlyMatch.setPlayerA(rankingAccessBDD.request("select * from PLAYER where " +
                     "FIRST_NAME = '"+playerA.substring(0,playerA.indexOf(" "))+
                     "' && LAST_NAME = '"+playerA.substring(playerA.indexOf(" ")+1, playerA.length())+"'").get(0));
-            frendlyMatch.setPlayerA(rankingAccessBDD.request("select * from PLAYER where " +
+            frendlyMatch.setPlayerB(rankingAccessBDD.request("select * from PLAYER where " +
                     "FIRST_NAME = '"+playerB.substring(0,playerB.indexOf(" "))+
                     "' && LAST_NAME = '"+playerB.substring(playerB.indexOf(" ")+1, playerB.length())+"'").get(0));
 
+            frendlyMatch.setFriendly(true);
+            frendlyMatch.setAutoplay(true);
+
             frendlyMatch.run();
 
-            while(!frendlyMatch.isFinished());
+            frendlyMatch.join();
 
             Stage resultStage = new Stage();
             try {
@@ -69,10 +74,12 @@ public class PlayFriendlyGameController extends SearchController {
 
     private void startResultWindow(Stage window, Stage parentStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("../fxml/PlayFrendlyGameResultFXML.fxml"));
-        Scene scene =  new Scene(root, 200 ,200);
-
+        Scene scene =  new Scene(root, 300 ,200);
+        //MainController controller = FXMLLoader.<MainController>getController();
+        //controller.setUser(user_id);
         window.initModality(Modality.WINDOW_MODAL);
         window.initOwner(parentStage);
+        window.setResizable(false);
         window.setScene(scene);
         window.show();
     }

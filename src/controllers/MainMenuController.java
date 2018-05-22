@@ -14,7 +14,6 @@ public class MainMenuController {
     public Button playTournamentButton;
     public Button playYearButton;
     public Button rankingButton;
-    public Button searchButton;
 
     @FXML
     public void playFriendlyGameLaunch(ActionEvent actionEvent) throws Exception {
