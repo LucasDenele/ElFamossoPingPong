@@ -73,12 +73,17 @@ public class PlayFriendlyGameController extends SearchController {
     }
 
     private void startResultWindow(Stage window, Stage parentStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../fxml/PlayFrendlyGameResultFXML.fxml"));
+        FXMLLoader  loader = new FXMLLoader(getClass().getResource("../fxml/PlayFrendlyGameResultFXML.fxml"));
+        Parent root = loader.load();
+        PlayFrendlyGameResultController controller = loader.getController();
+
+        controller.setResults(frendlyMatch.getWinner().getLastName(), frendlyMatch.getResults());
+
         Scene scene =  new Scene(root, 300 ,200);
-        //MainController controller = FXMLLoader.<MainController>getController();
-        //controller.setUser(user_id);
+
         window.initModality(Modality.WINDOW_MODAL);
         window.initOwner(parentStage);
+        window.setTitle(playerA+" vs "+playerB);
         window.setResizable(false);
         window.setScene(scene);
         window.show();

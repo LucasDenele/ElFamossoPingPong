@@ -5,18 +5,13 @@ import javafx.scene.control.ListView;
 
 import java.util.List;
 
-public class playFrendlyGameResultController {
-    public Label winnerLabel;
-    public ListView setList;
+public class PlayFrendlyGameResultController {
+    public ListView<String> resultsList;
 
-    private String winnerName;
-    private List<String> sets;
-
-    public void setWinnerName(String winnerName) {
-        this.winnerName = winnerName;
-    }
-
-    public void setSets(List<String> sets) {
-        this.sets = sets;
+    void setResults(String lastName, List<String> results) {
+        resultsList.getItems().clear();
+        resultsList.getItems().add("The winner is "+lastName);
+        resultsList.getItems().add("Sets Results :");
+        for(String it : results) resultsList.getItems().add(it);
     }
 }
