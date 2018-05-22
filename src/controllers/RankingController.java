@@ -1,20 +1,11 @@
 package controllers;
 
-import AccessBDD.AccessBDD;
 import javafx.event.ActionEvent;
-import javafx.scene.control.*;
-import javafx.scene.input.ScrollEvent;
-import player.Player;
+import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 
-import java.util.Vector;
-
-public class RankingController extends AbstractController{
-
-
-    public ListView<String> nameList;
-    public ListView<String> countryList;
-    public ListView<Double> scoreList;
-    public ListView<String> genderList;
+public class RankingController extends SearchController {
 
 
     public Button nameButton;
@@ -23,61 +14,54 @@ public class RankingController extends AbstractController{
     public Button genderButton;
     public Button searchButton;
 
-    public ChoiceBox nationalitySelecter;
-
-    public RadioButton maleChecker;
-    public RadioButton femaleChecker;
-
-    public TextField firstNameBox;
-    public TextField lastNameBox;
-
-    public ScrollBar listViewsScrollBar;
+    private boolean sortByNameUp = true;
+    private boolean sortByCountryUp = true;
+    private boolean sortByScoreUp = true;
+    private boolean sortByGenderUp = true;
 
     public void initialize(){
-
-        AccessBDD rankingAccessBDD = new AccessBDD();
-
-        Vector<Player> players = rankingAccessBDD.request("SELECT * FROM PLAYER");
-
-        for(Player it : players){
-            nameList.getItems().add(it.getFirstName()+" "+it.getLastName());
-            countryList.getItems().add(it.getCountry());
-            scoreList.getItems().add(it.getPoints());
-            genderList.getItems().add(it.getGender());
-        }
-
-        listViewsScrollBar.setMin(0);
-        listViewsScrollBar.setMax(players.size()-8);
-
+        sortLists("select * from PLAYER");
     }
 
     public void sortByName(ActionEvent actionEvent) {
+        if(sortByNameUp){
+            sortLists("select * from PLAYER order by LAST_NAME desc");
+            sortByNameUp = false;
+        }else{
+            sortLists("select * from PLAYER order by LAST_NAME");
+            sortByNameUp = true;
+        }
     }
 
     public void sortByCountry(ActionEvent actionEvent) {
+        if(sortByCountryUp){
+            sortLists("select * from PLAYER order by COUNTRY desc");
+            sortByCountryUp = false;
+        }else{
+            sortLists("select * from PLAYER order by COUNTRY");
+            sortByCountryUp = true;
+        }
     }
 
     public void sortByScore(ActionEvent actionEvent) {
+        if(sortByScoreUp){
+            sortLists("select * from PLAYER order by POINTS desc");
+            sortByScoreUp = false;
+        }else{
+            sortLists("select * from PLAYER order by POINTS");
+            sortByScoreUp = true;
+        }
     }
 
 
     public void sortByGender(ActionEvent actionEvent) {
+        if(sortByGenderUp){
+            sortLists("select * from PLAYER order by GENDER desc");
+            sortByGenderUp = false;
+        }else{
+            sortLists("select * from PLAYER order by GENDER");
+            sortByGenderUp = true;
+        }
     }
 
-
-    public void searchLaunch(ActionEvent actionEvent) {
-
-    }
-
-    public void scrollSynchro(ScrollEvent scrollEvent) {
-        nameList.scrollTo((int)listViewsScrollBar.getValue());
-        countryList.scrollTo((int)listViewsScrollBar.getValue());
-        genderList.scrollTo((int)listViewsScrollBar.getValue());
-        scoreList.scrollTo((int)listViewsScrollBar.getValue());
-
-    }
-
-    public void scrollKill(ScrollEvent scrollEvent) {
-        System.out.println("Coucou");
-    }
 }
