@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PlayYearController">
+   <ImageView fitHeight="400.0" fitWidth="606.0" layoutX="-2.0" opacity="0.4" pickOnBounds="true">
+      <Image url="@PingPongBackground.jpg" />
+   </ImageView>
+   <Label layoutX="248.0" layoutY="14.0" text="Play Year">
+      <font>
+         <Font name="System Bold" size="24.0" />
+      </font>
+   </Label>
+   <Button fx:id="backToMainMenuButton" layoutX="24.0" layoutY="23.0" mnemonicParsing="false" onAction="#backToMainMenu" text="Back" />
+   <Label layoutX="120.0" layoutY="142.0" text="Are you sure to launch a year ?">
+      <font>
+         <Font name="System Bold" size="24.0" />
+      </font>
+   </Label>
+   <Button fx:id="launchYearButton" layoutX="166.0" layoutY="224.0" mnemonicParsing="false" onAction="#launchYear" text="Yes" />
+   <Button layoutX="370.0" layoutY="224.0" mnemonicParsing="false" onAction="#backToMainMenu" text="No" />
+</AnchorPane>

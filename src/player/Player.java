@@ -3,18 +3,19 @@ package player;
 public class Player{
 	
 	//Attributes
-	private String name;
-	private int id;
-	private String gender;
+	private String firstName;
+	private String lastName;
 	private String country;
+	private double points;
+	private String gender;
 	private float endurance;
 	private float power;
-	private double points;
+
 	
 	//Constructor
-	public Player(String name, int id, String country, String gender, float endurance, float power, double points) {
-		this.setName(name);
-		this.setId(id);
+	public Player(String firstName, String lastName, String country, double points, String gender, float endurance, float power) {
+		this.setFirstName(firstName);
+		this.setLastName(lastName);
 		this.setCountry(country);
 		this.setGender(gender);
 		this.setEndurance(endurance);
@@ -23,27 +24,27 @@ public class Player{
 	}
 	
 	public void display() {
-		System.out.println("Name : "+this.getName()+
-						"| ID : "+this.getId()+
+		System.out.println("firstName : "+this.getFirstName()+
+						"| lastName : "+this.getLastName()+
 						"| Country : "+this.getCountry()+
+						"| Points : "+this.getPoints()+
 						"| Gender : "+this.getGender()+
 						"| Endurance : "+this.getEndurance()+
-						"| Power : "+this.getPower()+
-						"| Points : "+this.getPoints());
+						"| Power : "+this.getPower());
 	}
 	
 	//Getters & Setters
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public int getId() {
-		return id;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	public String getCountry() {
 		return this.country;

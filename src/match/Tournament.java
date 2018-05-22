@@ -138,7 +138,7 @@ public class Tournament {
 	
 	public void fillPlayers() {
 		//if the DTB is not found
-		Player p1 = new Player("Joueur1", 0, "FRA", "male", 70, 50, 300);
+		/*Player p1 = new Player("Joueur1", 0, "FRA", "male", 70, 50, 300);
 		Player p2 = new Player("Joueur2", 1, "FRA", "male", 80, 40, 142);
 		Player p3 = new Player("Joueur3", 2, "FRA", "male", 90, 50, 340);
 		Player p4 = new Player("Joueur4", 3, "FRA", "male", 80, 60, 110);
@@ -148,7 +148,7 @@ public class Tournament {
 		Player p8 = new Player("Joueur8", 7, "FRA", "male", 80, 60, 120);
 		
 		players.add(p1);players.add(p2);players.add(p3);players.add(p4);
-		players.add(p5);players.add(p6);players.add(p7);players.add(p8);
+		players.add(p5);players.add(p6);players.add(p7);players.add(p8);*/
 	}
 	
 }
