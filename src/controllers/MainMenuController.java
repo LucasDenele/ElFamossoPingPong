@@ -52,7 +52,7 @@ public class MainMenuController {
 
         System.out.println("Launch Ranking");
        try {
-            sceneSwitcher.uploadNewScene((Stage)rankingButton.getScene().getWindow(),"../fxml/RankingMainFXML.fxml", 600, 400);
+            sceneSwitcher.uploadNewScene((Stage)rankingButton.getScene().getWindow(),"../fxml/RankingFXML.fxml", 600, 400);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -7,89 +7,34 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.ScrollEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import match.Match;
 import player.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class PlayFriendlyGameController extends AbstractController{
+import java.util.TreeSet;
+import java.util.Vector;
 
 
-    public RadioButton maleChecker;
-    public RadioButton femaleChecker;
+public class PlayFriendlyGameController extends SearchController {
 
-    public TextField firstNameBox;
-    public TextField lastNameBox;
-
-    public ChoiceBox nationalitySelecter;
-
-    public ListView<String> nationalityList;
-    public ListView<String> nameList;
-    public ListView<String> genderList;
     public ListView<CheckBox> selectedList;
-    public ListView<Double> scoreList;
-
     public CheckBox autoplayCheckBox;
 
     public Button launchButton;
     public ScrollBar listViewsScrollBar;
-    public Button searchButton;
 
     public Label warningLabel;
 
     private int nomberOfSelectedPlayers = 0;
-    List<Player> test = new ArrayList<Player>();
-    Match frendlyMatch = new Match();
+    private String playerA = "";
+    private  String playerB = "";
+    private Match frendlyMatch = new Match();
 
 
     public void initialize(){
-        /*Player p1 = new Player("Joueur1", 0, "FRA", "female", 70, 50, 300);
-        Player p2 = new Player("Joueur2", 1, "FRA", "male", 80, 40, 142);
-        Player p3 = new Player("Joueur3", 2, "FRA", "male", 90, 50, 340);
-        Player p4 = new Player("Joueur4", 3, "FRA", "male", 80, 60, 12);
-        Player p5 = new Player("Joueur5", 4, "FRA", "male", 70, 50, 300);
-        Player p6 = new Player("Joueur6", 5, "FRA", "male", 80, 40, 142);
-        Player p7 = new Player("Joueur7", 6, "FRA", "male", 90, 50, 340);
-        Player p8 = new Player("Joueur8", 7, "FRA", "male", 80, 60, 12);
-        Player p9 = new Player("Joueur9", 7, "FRA", "male", 80, 60, 12);
-        Player p10 = new Player("Joueur10", 7, "FRA", "male", 80, 60, 12);
-        Player p11 = new Player("Joueur11", 7, "FRA", "male", 80, 60, 12);
-        Player p12 = new Player("Joueur12", 7, "FRA", "male", 80, 60, 12);
-        Player p13 = new Player("Joueur13", 7, "FRA", "male", 80, 60, 12);
-
-        test.add(p1);test.add(p2);test.add(p3);test.add(p4);
-        test.add(p5);test.add(p6);test.add(p7);test.add(p8);
-        test.add(p9);test.add(p10);test.add(p11);test.add(p12);
-        test.add(p13);
-
-        int i =0;
-        for (Player aTest : test) {
-            nameList.getItems().add(aTest.getName());
-            nationalityList.getItems().add(aTest.getCountry());
-            genderList.getItems().add(aTest.getGender());
-            scoreList.getItems().add(aTest.getPoints());
-            selectedList.getItems().add(new CheckBox());
-            i++;
-        }
-
-        for(CheckBox it : selectedList.getItems()) {
-            it.selectedProperty().addListener((observable, oldValue, newValue) -> {
-                nomberOfSelectedPlayers++;
-                if(nomberOfSelectedPlayers > 2){
-                    for(CheckBox its : selectedList.getItems()) its.setSelected(false);
-                    nomberOfSelectedPlayers = 0;
-                }
-            });
-        }
-
-        listViewsScrollBar.setMin(0);
-        listViewsScrollBar.setMax(test.size()-8);*/
-
+        sortLists("select * from PLAYER");
     }
 
     public void launchFrendlyGame(ActionEvent actionEvent){
@@ -97,26 +42,14 @@ public class PlayFriendlyGameController extends AbstractController{
             warningLabel.setText("Warning : you must select two players!");
         }else{
             warningLabel.setText("");
-            int idPlayerA = -1;
-            int idPlayerB = -1;
-            int i = 0;
 
-            for(CheckBox it : selectedList.getItems()){
-                if(it.isSelected()){
-                    if(idPlayerA == -1){
-                        idPlayerA = i;
-                    }else{
-                        idPlayerB = i;
-                    }
-                }
-                i++;
-            }
 
-            System.out.println("id A : "+idPlayerA);
-            System.out.println("id B : "+idPlayerB);
-
-            frendlyMatch.setPlayerA(test.get(idPlayerA));
-            frendlyMatch.setPlayerB(test.get(idPlayerB));
+            frendlyMatch.setPlayerA(rankingAccessBDD.request("select * from PLAYER where " +
+                    "FIRST_NAME = '"+playerA.substring(0,playerA.indexOf(" "))+
+                    "' && LAST_NAME = '"+playerA.substring(playerA.indexOf(" ")+1, playerA.length())+"'").get(0));
+            frendlyMatch.setPlayerA(rankingAccessBDD.request("select * from PLAYER where " +
+                    "FIRST_NAME = '"+playerB.substring(0,playerB.indexOf(" "))+
+                    "' && LAST_NAME = '"+playerB.substring(playerB.indexOf(" ")+1, playerB.length())+"'").get(0));
 
             frendlyMatch.run();
 
@@ -134,8 +67,8 @@ public class PlayFriendlyGameController extends AbstractController{
         }
     }
 
-    public void startResultWindow(Stage window, Stage parentStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../fxml/ResultSceneFXML.fxml"));
+    private void startResultWindow(Stage window, Stage parentStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/PlayFrendlyGameResultFXML.fxml"));
         Scene scene =  new Scene(root, 200 ,200);
 
         window.initModality(Modality.WINDOW_MODAL);
@@ -144,16 +77,81 @@ public class PlayFriendlyGameController extends AbstractController{
         window.show();
     }
 
-    public void launchSearch(ActionEvent actionEvent) {
+    @Override
+    public void sortLists(String request){
+
+        nameList.getItems().clear();
+        countryList.getItems().clear();
+        scoreList.getItems().clear();
+        genderList.getItems().clear();
+        nationalitySelecter.getItems().clear();
+        selectedList.getItems().clear();
+
+
+        Vector<Player> players = rankingAccessBDD.request(request);
+        TreeSet<String> nationalities = new TreeSet<>();
+
+        int i = 0;
+        for(Player it : players){
+            nameList.getItems().add(it.getFirstName()+" "+it.getLastName());
+            countryList.getItems().add(it.getCountry());
+            scoreList.getItems().add(it.getPoints());
+            genderList.getItems().add(it.getGender());
+            selectedList.getItems().add(new CheckBox());
+
+            if((it.getFirstName()+it.getLastName()).equals(playerA.replace(" ", ""))
+                    || (it.getFirstName()+it.getLastName()).equals(playerB.replace(" ", ""))){
+                selectedList.getItems().get(i).setSelected(true);
+            }
+
+            selectedList.getItems().get(selectedList.getItems().size()-1)
+                    .selectedProperty().addListener((observable, oldValue, newValue) -> {
+
+                        nomberOfSelectedPlayers++;
+                        if(nomberOfSelectedPlayers > 2) {
+                            for (CheckBox its : selectedList.getItems()) its.setSelected(false);
+                            nomberOfSelectedPlayers = 0;
+                            playerA = "";
+                            playerB = "";
+                        }else {
+                            int j = 0;
+                            for (CheckBox its : selectedList.getItems()) {
+                                if (its.isSelected()
+                                        && !playerA.equals(nameList.getItems().get(j).replace(" ", ""))
+                                        && !playerB.equals(nameList.getItems().get(j).replace(" ", ""))) {
+                                    if (playerA.equals("")) {
+                                        playerA = nameList.getItems().get(j);
+                                    } else {
+                                        playerB = nameList.getItems().get(j);
+                                    }
+                                }
+                                j++;
+                            }
+                        }
+                    });
+            nationalities.add(it.getCountry());
+            i++;
+        }
+
+
+        nationalitySelecter.getItems().add("-");
+
+        for(String it : nationalities){
+            nationalitySelecter.getItems().add(it);
+        }
+
+        nationalitySelecter.getSelectionModel().selectFirst();
+
+        listViewsScrollBar.setMin(0);
+        listViewsScrollBar.setMax(players.size()-8);
+
+        players.clear();
     }
 
-    public void scrollSyncro(ScrollEvent scrollEvent) {
-        nameList.scrollTo((int)listViewsScrollBar.getValue());
-        nationalityList.scrollTo((int)listViewsScrollBar.getValue());
-        genderList.scrollTo((int)listViewsScrollBar.getValue());
-        scoreList.scrollTo((int)listViewsScrollBar.getValue());
+    @Override
+    public void scrollSynchro(ScrollEvent scrollEvent){
+        super.scrollSynchro(scrollEvent);
         selectedList.scrollTo((int)listViewsScrollBar.getValue());
     }
-
 
 }

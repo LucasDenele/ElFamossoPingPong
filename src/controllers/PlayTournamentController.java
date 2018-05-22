@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 
-public class PlayTournamentController extends AbstractController{
+public class PlayTournamentController extends SwitcherController {
 
 
     public RadioButton maleChecker;

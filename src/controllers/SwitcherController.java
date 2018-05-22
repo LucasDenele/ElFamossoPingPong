@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class AbstractController {
+public class SwitcherController {
 
     SceneSwitcher sceneSwitcher = new SceneSwitcher();
 
