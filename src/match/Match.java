@@ -100,7 +100,7 @@ public class Match extends Thread{
 	@Override
 	public void run() {
 		int i = 0;
-		System.out.println("	Match "+this.getId()+" : "+this.player1.getName()+" VS "+this.player2.getName());
+		//System.out.println("	Match "+this.getId()+" : "+this.player1.getName()+" VS "+this.player2.getName());
 		while(!isFinished()) {
 			newSet(i);
 			i++;
@@ -115,7 +115,7 @@ public class Match extends Thread{
 			//System.out.println("Match "+this.getId()+" - ReceivedP2 :"+this.getPointsReceivedPlayer2());
 	}
 		
-		System.out.println("				Results Match "+this.getId()+"  Winner "+this.getWinner().getName()+" : "+this.getScorePlayer1()+" to "+this.getScorePlayer2());
+		//System.out.println("				Results Match "+this.getId()+"  Winner "+this.getWinner().getName()+" : "+this.getScorePlayer1()+" to "+this.getScorePlayer2());
 	}
 	
 	public void newSet(int id) {

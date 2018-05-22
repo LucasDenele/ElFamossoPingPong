@@ -118,8 +118,8 @@ public class Main {
 		test.add(p5);test.add(p6);test.add(p7);test.add(p8);
 		Year y = new Year(2018);
 		y.runTournament("OpenUS");
-		y.runTournament("OpenUS");
-		//y.runYear();
+		//y.runTournament("OpenUS");
+		y.runYear();
 	}
 
 }

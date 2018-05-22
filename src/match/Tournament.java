@@ -104,29 +104,18 @@ public class Tournament {
 			newRound(i*10);
 		}
 		this.setFinished(true);
-		System.out.println("Tournament "+this.getName()+" - Winner : "+this.getWinner().getName());
+		//System.out.println("Tournament "+this.getName()+" - Winner : "+this.getWinner().getName());
 		
 		this.setPlayersUpdate(rounds.get(0).getPlayersUpdate());
+		/*
 		for(Player p : playersUpdate) {
 			p.display();
 		}
-		for(Round r:rounds) {
-			System.out.println("R"+r.getId());
-			for(Player qTournament : playersUpdate) {
-				for(Player pRound : r.getPlayersUpdate()) {
-					if(pRound.getName()== qTournament.getName()) {
-						//qTournament.setPoints(pRound.getPoints());
-					}
-				}
-			}
-			for(Player p : playersUpdate) {
-				p.display();
-			}
-		}
+		*/
 	}
 	
 	public void newRound(int id) {
-		System.out.println("Tournament "+this.getName());
+		//System.out.println("Tournament "+this.getName());
 		
 		Round currentRound;
 			//check if it's the first round
@@ -138,10 +127,8 @@ public class Tournament {
 		}
 		currentRound.runRound();
 		
-		while(!currentRound.isFinished()) {
-			
-		}
-		System.out.println("Round "+ currentRound.getId());
+		while(!currentRound.isFinished());
+		//System.out.println("Round "+ currentRound.getId());
 		
 		this.rounds.add(currentRound);
 		if(currentRound.getWinners().size() == 1) {
@@ -154,11 +141,11 @@ public class Tournament {
 		Player p1 = new Player("Joueur1", 0, "FRA", "male", 70, 50, 300);
 		Player p2 = new Player("Joueur2", 1, "FRA", "male", 80, 40, 142);
 		Player p3 = new Player("Joueur3", 2, "FRA", "male", 90, 50, 340);
-		Player p4 = new Player("Joueur4", 3, "FRA", "male", 80, 60, 12);
+		Player p4 = new Player("Joueur4", 3, "FRA", "male", 80, 60, 110);
 		Player p5 = new Player("Joueur5", 4, "FRA", "male", 70, 50, 300);
 		Player p6 = new Player("Joueur6", 5, "FRA", "male", 80, 40, 142);
 		Player p7 = new Player("Joueur7", 6, "FRA", "male", 90, 50, 340);
-		Player p8 = new Player("Joueur8", 7, "FRA", "male", 80, 60, 12);
+		Player p8 = new Player("Joueur8", 7, "FRA", "male", 80, 60, 120);
 		
 		players.add(p1);players.add(p2);players.add(p3);players.add(p4);
 		players.add(p5);players.add(p6);players.add(p7);players.add(p8);
