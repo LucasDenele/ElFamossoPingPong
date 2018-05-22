@@ -115,7 +115,7 @@ public class Tournament {
 			for(Player qTournament : playersUpdate) {
 				for(Player pRound : r.getPlayersUpdate()) {
 					if(pRound.getName()== qTournament.getName()) {
-						qTournament.setPoints(pRound.getPoints());
+						//qTournament.setPoints(pRound.getPoints());
 					}
 				}
 			}

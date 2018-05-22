@@ -115,7 +115,7 @@ public class Match extends Thread{
 			//System.out.println("Match "+this.getId()+" - ReceivedP2 :"+this.getPointsReceivedPlayer2());
 	}
 		
-		System.out.println("Results Match "+this.getId()+"  Winner "+this.getWinner().getName()+" : "+this.getScorePlayer1()+" to "+this.getScorePlayer2());
+		System.out.println("				Results Match "+this.getId()+"  Winner "+this.getWinner().getName()+" : "+this.getScorePlayer1()+" to "+this.getScorePlayer2());
 	}
 	
 	public void newSet(int id) {
@@ -144,13 +144,13 @@ public class Match extends Thread{
 		//Winner conditions
 		//P1 Wins the game
 		if(this.scorePlayer1 > 2 && this.scorePlayer1 - this.scorePlayer2 >= 2) {
-			this.setFinished(true);
 			this.setWinner(player1);
+			this.setFinished(true);
 		}
 		//P2 Wins the game
 		else if(this.scorePlayer2 > 2 && this.scorePlayer2 - this.scorePlayer1 >= 2) {
-			this.setFinished(true);
 			this.setWinner(player2);
+			this.setFinished(true);
 		}
 		
 		sets.add(currentSet);
