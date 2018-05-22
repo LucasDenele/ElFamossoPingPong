@@ -86,14 +86,14 @@ public class Round {
 			
 			//Update of the players statistics with the round number						
 			if(m.getWinner() == m.getPlayer1()) { //P1 wins
-				tmpP1.setPoints(tmpP1.getPoints()+this.getId()*m.getPointsReceivedPlayer1()/7);
-				tmpP2.setPoints(tmpP2.getPoints()-this.getId()*m.getPointsReceivedPlayer2()/7);
-				tmpWinner.setPoints(tmpWinner.getPoints()+this.getId()*m.getPointsReceivedPlayer1()/7);
+				tmpP1.setPoints(tmpP1.getPoints()+(this.getId()+1)*m.getPointsReceivedPlayer1()/7);
+				tmpP2.setPoints(tmpP2.getPoints()-(this.getId()+1)*m.getPointsReceivedPlayer2()/7);
+				tmpWinner.setPoints(tmpP1.getPoints());
 			}
 			else if(m.getWinner() == m.getPlayer2()) { //P2 wins
-				tmpP1.setPoints(tmpP1.getPoints()-this.getId()*m.getPointsReceivedPlayer1()/7);
-				tmpP2.setPoints(tmpP2.getPoints()+this.getId()*m.getPointsReceivedPlayer2()/7);
-				tmpWinner.setPoints(tmpWinner.getPoints()+this.getId()*m.getPointsReceivedPlayer2()/7);
+				tmpP1.setPoints(tmpP1.getPoints()-(this.getId()+1)*m.getPointsReceivedPlayer1()/7);
+				tmpP2.setPoints(tmpP2.getPoints()+(this.getId()+1)*m.getPointsReceivedPlayer2()/7);
+				tmpWinner.setPoints(tmpP2.getPoints());
 			}
 			this.playersUpdate.add(tmpP1);
 			this.playersUpdate.add(tmpP2);

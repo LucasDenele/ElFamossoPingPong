@@ -11,6 +11,7 @@ public class Tournament {
 	private String name;
 	private List<Round> rounds = new ArrayList<Round>();
 	private List<Player> players = new ArrayList<Player>();
+	private List<Player> playersUpdate = new ArrayList<Player>();
 	private Player winner;
 	private boolean finished = false;
 	
@@ -45,52 +46,58 @@ public class Tournament {
 	public void setFinished(boolean finished) {
 		this.finished = finished;
 	}
-
+	public List<Player> getPlayersUpdate() {
+		return playersUpdate;
+	}
+	public void setPlayersUpdate(List<Player> playersUpdate) {
+		this.playersUpdate = playersUpdate;
+	}
+	
+	//Functions
 	public void run(String name) {
 
 		//Choice of the selected tournament
 		switch(name) {
-		
-		case "OpenAus":
-			//Request for the 128 best players
-			this.setName("Australian Open");
-			fillPlayers();
-			break;
+			case "OpenAus":
+				//Request for the 128 best players
+				this.setName("Australian Open");
+				fillPlayers();
+				break;
+				
+			case "OpenBra":
+				//Request for the 128 worst players
+				this.setName("Brasilian Open");
+				fillPlayers();
+				break;
+				
+			case "OpenChi":
+				//Request for the 128 worst players
+				this.setName("Chinese Open");
+				fillPlayers();
+				break;
+				
+			case "OpenFra":
+				//Request for 128 random players
+				this.setName("French Open");
+				fillPlayers();
+				break;
+				
+			case "OpenGer":
+				//Request for 128 random players
+				this.setName("German Open");
+				fillPlayers();
+				break;
+				
+			case "OpenUS":
+				//Request for the 128 best players
+				this.setName("US Open");
+				fillPlayers();
+				break;
 			
-		case "OpenBra":
-			//Request for the 128 worst players
-			this.setName("Brasilian Open");
-			fillPlayers();
-			break;
-			
-		case "OpenChi":
-			//Request for the 128 worst players
-			this.setName("Chinese Open");
-			fillPlayers();
-			break;
-			
-		case "OpenFra":
-			//Request for 128 random players
-			this.setName("French Open");
-			fillPlayers();
-			break;
-			
-		case "OpenGer":
-			//Request for 128 random players
-			this.setName("German Open");
-			fillPlayers();
-			break;
-			
-		case "OpenUS":
-			//Request for the 128 best players
-			this.setName("US Open");
-			fillPlayers();
-			break;
-		
-		default:
-			//Without DTB
-			fillPlayers();
-			break;
+			default:
+				//Without DTB
+				fillPlayers();
+				break;
 		}
 		
 		for(int i = 0;i < 7;i++) {
@@ -98,6 +105,24 @@ public class Tournament {
 		}
 		this.setFinished(true);
 		System.out.println("Tournament "+this.getName()+" - Winner : "+this.getWinner().getName());
+		
+		this.setPlayersUpdate(rounds.get(0).getPlayersUpdate());
+		for(Player p : playersUpdate) {
+			p.display();
+		}
+		for(Round r:rounds) {
+			System.out.println("R"+r.getId());
+			for(Player qTournament : playersUpdate) {
+				for(Player pRound : r.getPlayersUpdate()) {
+					if(pRound.getName()== qTournament.getName()) {
+						qTournament.setPoints(pRound.getPoints());
+					}
+				}
+			}
+			for(Player p : playersUpdate) {
+				p.display();
+			}
+		}
 	}
 	
 	public void newRound(int id) {
