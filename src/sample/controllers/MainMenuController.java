@@ -58,13 +58,4 @@ public class MainMenuController {
             e.printStackTrace();
         }
     }
-
-    public void searchLaunch(ActionEvent actionEvent) {
-        System.out.println("Launch Search");
-        try {
-            sceneSwitcher.uploadNewScene((Stage)searchButton.getScene().getWindow(),"fxml/SearchMenuFXML.fxml", 600, 400);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

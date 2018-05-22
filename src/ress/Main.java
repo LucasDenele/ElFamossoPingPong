@@ -112,6 +112,7 @@ public class Main {
 		Player p6 = new Player("Joueur6", 5, "FRA", "male", 80, 40, 142);
 		Player p7 = new Player("Joueur7", 6, "FRA", "male", 90, 50, 340);
 		Player p8 = new Player("Joueur8", 7, "FRA", "male", 80, 60, 12);
+
 		List<Player> test = new ArrayList<Player>(); 
 		test.add(p1);test.add(p2);test.add(p3);test.add(p4);
 		test.add(p5);test.add(p6);test.add(p7);test.add(p8);
