@@ -30,7 +30,6 @@ public class PlayFriendlyGameController extends SearchController {
     private int nomberOfSelectedPlayers = 0;
     private String playerA = "";
     private  String playerB = "";
-    private Match frendlyMatch = new Match();
 
 
     public void initialize(){
@@ -41,11 +40,13 @@ public class PlayFriendlyGameController extends SearchController {
         if(nomberOfSelectedPlayers != 2){
             warningLabel.setText("Warning : you must select two players!");
         }else{
+            Match frendlyMatch = new Match();
+
             warningLabel.setText("");
 
             rankingAccessBDD.request("select * from PLAYER where " +
                     "FIRST_NAME = '"+playerB.substring(0,playerB.indexOf(" "))+
-                    "' && LAST_NAME = '"+playerB.substring(playerB.indexOf(" ")+1, playerB.length())+"'").get(0).display();
+                    "' && LAST_NAME = '"+playerB.substring(playerB.indexOf(" ")+1, playerB.length())+"'").get(0);
             frendlyMatch.setPlayerA(rankingAccessBDD.request("select * from PLAYER where " +
                     "FIRST_NAME = '"+playerA.substring(0,playerA.indexOf(" "))+
                     "' && LAST_NAME = '"+playerA.substring(playerA.indexOf(" ")+1, playerA.length())+"'").get(0));
@@ -54,7 +55,7 @@ public class PlayFriendlyGameController extends SearchController {
                     "' && LAST_NAME = '"+playerB.substring(playerB.indexOf(" ")+1, playerB.length())+"'").get(0));
 
             frendlyMatch.setFriendly(true);
-            frendlyMatch.setAutoplay(true);
+            frendlyMatch.setAutoplay(autoplayCheckBox.isSelected());
 
             frendlyMatch.run();
 
@@ -62,22 +63,21 @@ public class PlayFriendlyGameController extends SearchController {
 
             Stage resultStage = new Stage();
             try {
-                startResultWindow(resultStage, (Stage) launchButton.getScene().getWindow());
+                startResultWindow(resultStage, (Stage) launchButton.getScene().getWindow(), frendlyMatch);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            frendlyMatch.setFinished(false);
+
 
         }
     }
 
-    private void startResultWindow(Stage window, Stage parentStage) throws Exception {
+    private void startResultWindow(Stage window, Stage parentStage, Match frendlyMatch) throws Exception {
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("../fxml/PlayFrendlyGameResultFXML.fxml"));
         Parent root = loader.load();
         PlayFrendlyGameResultController controller = loader.getController();
-
-        controller.setResults(frendlyMatch.getWinner().getLastName(), frendlyMatch.getResults());
+        controller.setResults(frendlyMatch);
 
         Scene scene =  new Scene(root, 300 ,200);
 

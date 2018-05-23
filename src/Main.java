@@ -3,6 +3,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import match.Match;
+import player.Player;
+
+import java.util.List;
 
 public class Main extends Application {
 
@@ -18,5 +22,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
     }
 }
