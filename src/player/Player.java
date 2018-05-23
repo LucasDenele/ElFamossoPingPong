@@ -23,16 +23,6 @@ public class Player{
 		this.setPoints(points);
 	}
 	
-	public void display() {
-		System.out.println("firstName : "+this.getFirstName()+
-						"| lastName : "+this.getLastName()+
-						"| Country : "+this.getCountry()+
-						"| Points : "+this.getPoints()+
-						"| Gender : "+this.getGender()+
-						"| Endurance : "+this.getEndurance()+
-						"| Power : "+this.getPower());
-	}
-	
 	//Getters & Setters
 	public String getFirstName() {
 		return firstName;

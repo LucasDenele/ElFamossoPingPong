@@ -1,5 +1,6 @@
 package match;
 
+import AccessBDD.AccessBDD;
 import javafx.util.Pair;
 import player.Player;
 
@@ -9,42 +10,41 @@ import java.util.List;
 public class Match extends Thread{
 	
 	//Attributes
-	private int id;
 	private Player playerA;
 	private Player playerB;
 	private Player winner;
 	private boolean finished;
 	private boolean autoplay;
 	private boolean friendly;
-	private int scorePlayerA;
-	private int scorePlayerB;
+	private int setScorePlayerA = 0;
+	private int setScorePlayerB = 0;
 	private Set currentSet;
-	private double pointsReceivedPlayerA;
-	private double pointsReceivedPlayerB;
-	private List<Set> sets = new ArrayList<Set>();
+	private double rondPointsPlayersFactor;
+	private Player winnerSet;
+	private Set setToUse;
 	private List<String> results = new ArrayList<String>();
+	private AccessBDD updatePlayersPoints = new AccessBDD();
 	
 	//Constructor
-	public Match(){}
+	public Match(){
+		super();
+	}
 
-	public Match(int id, Player playerA, Player playerB, boolean friendly) {
-		this.setId(id);
-		this.setPlayerA(playerA);
-		this.setPlayerB(playerB);
-		this.setFinished(false);
-		this.setAutoplay(true);
-		this.setFriendly(friendly);
-		this.setScorePlayerA(0);
-		this.setScorePlayerB(0);
+	public Match(Player playerA, Player playerB, double rondPointsPlayersFactor, boolean friendly) {
+		setPlayerA(playerA);
+		setPlayerB(playerB);
+		setRondPointsPlayersFactor(rondPointsPlayersFactor);
+		setFriendly(friendly);
+		setToUse = new Set(getPlayerA(), getPlayerB());
+
 	}
 
 	//Getters & Setters
-	public long getId() {
-		return id;
+
+	public void setSetToUse() {
+		setToUse = new Set(getPlayerA(), getPlayerB());
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public Player getPlayerA() {
 		return playerA;
 	}
@@ -63,53 +63,11 @@ public class Match extends Thread{
 	public void setWinner(Player winner) {
 		this.winner = winner;
 	}
-	public int getScorePlayerA() {
-		return scorePlayerA;
-	}
-	public void setScorePlayerA(int scorePlayerA) {
-		this.scorePlayerA = scorePlayerA;
-	}
-	public int getScorePlayerB() {
-		return scorePlayerB;
-	}
-	public void setScorePlayerB(int scorePlayerB) {
-		this.scorePlayerB = scorePlayerB;
-	}
-	public List<Set> getSets() {
-		return sets;
-	}
-	public void setSets(List<Set> sets) {
-		this.sets = sets;
-	}
 	public boolean isFinished() {
 		return finished;
 	}
 	public void setFinished(boolean finished) {
 		this.finished = finished;
-	}
-	public boolean isFriendly() {
-		return friendly;
-	}
-	public void setFriendly(boolean friendly) {
-		this.friendly = friendly;
-	}
-	public double getPointsReceivedPlayerA() {
-		return pointsReceivedPlayerA;
-	}
-	public void setPointsReceivedPlayerA(double pointsReceivedPlayerA) {
-		this.pointsReceivedPlayerA = pointsReceivedPlayerA;
-	}
-	public double getPointsReceivedPlayerB() {
-		return pointsReceivedPlayerB;
-	}
-	public void setPointsReceivedPlayerB(double pointsReceivedPlayerB) {
-		this.pointsReceivedPlayerB = pointsReceivedPlayerB;
-	}
-	public List<String> getResults() {
-		return results;
-	}
-	public void setResults(List<String> results) {
-		this.results = results;
 	}
 	public boolean isAutoplay() {
 		return autoplay;
@@ -117,118 +75,80 @@ public class Match extends Thread{
 	public void setAutoplay(boolean autoplay) {
 		this.autoplay = autoplay;
 	}
+	public boolean isFriendly() {
+		return friendly;
+	}
+	public void setFriendly(boolean friendly) {
+		this.friendly = friendly;
+	}
+	public int getSetScorePlayerA() {
+		return setScorePlayerA;
+	}
+	public int getSetScorePlayerB() {
+		return setScorePlayerB;
+	}
 	public Set getCurrentSet() {
 		return currentSet;
 	}
 	public void setCurrentSet(Set currentSet) {
 		this.currentSet = currentSet;
 	}
+	public double getRondPointsPlayersFactor() {
+		return rondPointsPlayersFactor;
+	}
+	public void setRondPointsPlayersFactor(double rondPointsPlayersFactor) {
+		this.rondPointsPlayersFactor = rondPointsPlayersFactor;
+	}
+	public List<String> getResults() {
+		return results;
+	}
+	public void setResults(List<String> results) {
+		this.results = results;
+	}
 
 	@Override
 	public void run() {
-		if(autoplay){
-			int i = 0;
-			//System.out.println("	Match "+this.getId()+" : "+this.player1.getName()+" VS "+this.player2.getName());
-			while(!isFinished()) {
-				newSet(i);
-				i++;
+		Player playerWinner;
+
+		while(getSetScorePlayerA() < 3 && getSetScorePlayerB() < 3){
+			playerWinner = setToUse.runSet();
+			if(playerWinner == getPlayerA()){
+				setScorePlayerA++;
+			}else{
+				setScorePlayerB++;
 			}
-		}
-		else{
-			//runManual();
+			results.add(setToUse.getScorePlayerA()+" - "+setToUse.getScorePlayerB());
+			setToUse.resetSet();
 		}
 
-		if(!isFriendly()) {
-			//Player 1
-			this.setPointsReceivedPlayerA(this.playerB.getPoints()/this.playerA.getPoints()
-					*Math.abs(this.getScorePlayerA() - this.getScorePlayerB()));
-			System.out.println("Match "+this.getId()+" - ReceivedP1 :"+this.getPointsReceivedPlayerA());
-			//player 2
-			this.setPointsReceivedPlayerB(this.playerA.getPoints()/this.playerB.getPoints()
-					*Math.abs(this.getScorePlayerA() - this.getScorePlayerB()));
-			System.out.println("Match "+this.getId()+" - ReceivedP2 :"+this.getPointsReceivedPlayerB());
-		}
-		/*for(String s : results){
-			System.out.println(s);
-		}*/
+		if(setScorePlayerA == 3) setWinner(getPlayerA());
+		if(setScorePlayerA == 3) setWinner(getPlayerB());
+
+		setFinished(true);
 	}
 
 	public void runManual(){
 		if(!isFinished()){
-			if (sets.isEmpty()) {
-				newSet(sets.size());
-				sets.add(currentSet);
-			}
-			if(!currentSet.isFinished()){
-				currentSet.runPoint();
-
-				checkWinner();
+			if(!setToUse.isFinished()){
+				setToUse.runPoint();
+				results.add(setToUse.getScorePlayerA()+" - "+setToUse.getScorePlayerB());
 			}else{
-				newSet(sets.size());
-				sets.add(currentSet);
+				winnerSet = setToUse.getWinner();
+				if(winnerSet == playerA){
+					setScorePlayerA++;
+				}else{
+					setScorePlayerB++;
+				}
+				setToUse.resetSet();
 			}
-			if(currentSet.getId() == results.size()){
-				System.out.println("== : "+currentSet.getId()+" - "+results.size());
-				results.add(currentSet.getScorePlayerA()+" - "+currentSet.getScorePlayerB());
-			}else{
-				System.out.println("!= : "+currentSet.getId()+" - "+results.size());
-				results.set(currentSet.getId(), currentSet.getScorePlayerA()+" - "+currentSet.getScorePlayerB());
+			if(setScorePlayerA == 3){
+				setWinner(getPlayerA());
+				setFinished(true);
 			}
-			if (this.isFinished() && !isFriendly()) {
-					//Player 1
-					this.setPointsReceivedPlayerA(this.playerB.getPoints() / this.playerA.getPoints()
-							* Math.abs(this.getScorePlayerA() - this.getScorePlayerB()));
-					//player 2
-					this.setPointsReceivedPlayerB(this.playerA.getPoints() / this.playerB.getPoints()
-							* Math.abs(this.getScorePlayerA() - this.getScorePlayerB()));
+			if(setScorePlayerB == 3){
+				setWinner(getPlayerB());
+				setFinished(true);
 			}
 		}
 	}
-	public void newSet(int id) {
-		this.setCurrentSet(new Set(id, this.playerA, this.playerB));
-
-		if(autoplay){
-			currentSet.runSet();
-		}
-		checkWinner();
-
-	}
-
-	public void checkWinner(){
-		//check who is the winner of the current set
-		if(currentSet.getWinner() == this.playerA) {
-			//System.out.println(this.playerA.getLastName()+" wins the set");
-			this.scorePlayerA += 1;
-		}
-		else if(currentSet.getWinner() == this.playerB) {
-			//System.out.println(this.playerB.getLastName()+" wins the set");
-			this.scorePlayerB += 1;
-		}
-		else {
-			System.out.println("No body wins the set");
-		}
-
-		//Case if a player has endurance = 0
-		if(currentSet.isConcede()) {
-			this.setFinished(true);
-		}
-
-		if(autoplay) this.results.add(currentSet.getScorePlayerA()+"-"+currentSet.getScorePlayerB());
-
-		//Winner conditions
-		//P1 Wins the game
-		if(this.scorePlayerA > 2) {
-			this.setWinner(playerA);
-			this.setFinished(true);
-		}
-		//P2 Wins the game
-		else if(this.scorePlayerB > 2) {
-			this.setWinner(playerB);
-			this.setFinished(true);
-		}
-
-		//if(currentSet.getWinner() != null)
-		if(autoplay) sets.add(currentSet);
-	}
-
 }

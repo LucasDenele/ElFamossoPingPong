@@ -1,22 +1,21 @@
 package match;
 
+import AccessBDD.AccessBDD;
 import player.Player;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class Tournament {
 	
 	//Attributes
 	private String name;
-	private String reference;
-	private String date;
-	private String matchs;
 	private List<Round> rounds = new ArrayList<Round>();
 	private List<Player> players = new ArrayList<Player>();
-	private List<Player> playersUpdate = new ArrayList<Player>();
 	private Player winner;
-	private boolean finished = false;
+	private AccessBDD playersAccessBDD = new AccessBDD();
 
 
 	//Constructors
@@ -24,11 +23,8 @@ public class Tournament {
 		super();
 	}
 
-	public Tournament(String name, String reference, String date, String matchs){
+	public Tournament(String name){
 		this.name = name;
-		this.reference = reference;
-		this.date = date;
-		this.matchs = matchs;
 	}
 	
 	//Getters & Setters
@@ -41,130 +37,87 @@ public class Tournament {
 	public List<Round> getRounds() {
 		return rounds;
 	}
-	public void setRounds(List<Round> rounds) {
-		this.rounds = rounds;
-	}
-	public List<Player> getPlayers() {
-		return players;
-	}
-	public void setPlayers(List<Player> players) {
-		this.players = players;
-	}
 	public Player getWinner() {
 		return winner;
 	}
 	public void setWinner(Player winner) {
 		this.winner = winner;
 	}
-	public boolean isFinished() {
-		return finished;
-	}
-	public void setFinished(boolean finished) {
-		this.finished = finished;
-	}
-	public List<Player> getPlayersUpdate() {
-		return playersUpdate;
-	}
-	public void setPlayersUpdate(List<Player> playersUpdate) {
-		this.playersUpdate = playersUpdate;
-	}
 	
 	//Functions
 	public void run(String name) {
-
+        Vector<Player> playersDTB = new Vector<>();
 		//Choice of the selected tournament
 		switch(name) {
 			case "OpenAus":
 				//Request for the 128 best players
+                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER order by POINTS desc limit 128");
 				this.setName("Australian Open");
-				fillPlayers();
 				break;
 				
 			case "OpenBra":
 				//Request for the 128 worst players
+                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER order by POINTS limit 128");
 				this.setName("Brasilian Open");
-				fillPlayers();
 				break;
 				
 			case "OpenChi":
 				//Request for the 128 worst players
-				this.setName("Chinese Open");
-				fillPlayers();
+                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER order by POINTS limit 128");
+                this.setName("Chinese Open");
 				break;
 				
 			case "OpenFra":
 				//Request for 128 random players
+                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER order by POINTS desc limit 128");
 				this.setName("French Open");
-				fillPlayers();
 				break;
 				
 			case "OpenGer":
 				//Request for 128 random players
+                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER order by POINTS limit 128");
 				this.setName("German Open");
-				fillPlayers();
 				break;
 				
 			case "OpenUS":
 				//Request for the 128 best players
+                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER order by POINTS desc limit 128");
 				this.setName("US Open");
-				fillPlayers();
 				break;
 			
 			default:
-				//Without DTB
-				fillPlayers();
 				break;
 		}
-		
+
+		players.addAll(playersDTB);
+		playersDTB.clear();
+
 		for(int i = 0;i < 7;i++) {
-			newRound(i*10);
+			if(i <= 2)  newRound(i+1/7, "Round "+(i+1));
+			if(i == 3) newRound(i+1/7, "Knockout");
+			if(i == 4) newRound(i+1/7, "Quater Final");
+			if(i == 5) newRound(i+1/7, "Semi Final");
+			if(i == 6) newRound(i+1/7, "Final");
 		}
-		this.setFinished(true);
-		//System.out.println("Tournament "+this.getName()+" - Winner : "+this.getWinner().getName());
-		
-		this.setPlayersUpdate(rounds.get(0).getPlayersUpdate());
-		/*
-		for(Player p : playersUpdate) {
-			p.display();
-		}
-		*/
 	}
 	
-	public void newRound(int id) {
-		//System.out.println("Tournament "+this.getName());
+	private void newRound(double roundPointsPlayerFactor ,String roundName) {
 		
 		Round currentRound;
-			//check if it's the first round
+
+		//check if it's the first round
 		if (!rounds.isEmpty()) {
-			currentRound = new Round(id, rounds.get(rounds.size()-1).getWinners());
+			currentRound = new Round(roundPointsPlayerFactor, roundName, rounds.get(rounds.size()-1).getWinners());
 		}
 		else {
-			currentRound = new Round(id, players);
+			currentRound = new Round(roundPointsPlayerFactor, roundName, players);
 		}
 		currentRound.runRound();
-		
-		while(!currentRound.isFinished());
-		//System.out.println("Round "+ currentRound.getId());
 		
 		this.rounds.add(currentRound);
 		if(currentRound.getWinners().size() == 1) {
 			this.setWinner(currentRound.getWinners().remove(0));
 		}
-	}
-	
-	public void fillPlayers() {
-		//if the DTB is not found
-		/*Player p1 = new Player("Joueur1", "a", "FRA", 300, "male", 70, 50);
-		Player p2 = new Player("Joueur2", "b", "FRA", 142, "male", 80, 40);
-		Player p3 = new Player("Joueur3", 2, "FRA", "male", 90, 50, 340);
-		Player p4 = new Player("Joueur4", 3, "FRA", "male", 80, 60, 110);
-		Player p5 = new Player("Joueur5", 4, "FRA", "male", 70, 50, 300);
-		Player p6 = new Player("Joueur6", 5, "FRA", "male", 80, 40, 142);
-		Player p7 = new Player("Joueur7", 6, "FRA", "male", 90, 50, 340);
-		Player p8 = new Player("Joueur8", 7, "FRA", "male", 80, 60, 120);
-		
-		players.add(p1);players.add(p2);players.add(p3);players.add(p4);
-		players.add(p5);players.add(p6);players.add(p7);players.add(p8);*/
 	}
 	
 }

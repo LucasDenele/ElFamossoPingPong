@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@hideScrollBars.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TournamentSummaryController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0" opacity="0.4" pickOnBounds="true">
+         <image>
+            <Image url="@PingPongBackground.jpg" />
+         </image>
+      </ImageView>
+      <ChoiceBox fx:id="roundSelecter" layoutX="236.0" layoutY="33.0" prefWidth="150.0" />
+      <Button fx:id="launchRoundViewButton" layoutX="282.0" layoutY="74.0" mnemonicParsing="false" onAction="#launchRoundView" prefHeight="25.0" prefWidth="58.0" text="see">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <ListView fx:id="matchsList" layoutX="80.0" layoutY="160.0" prefHeight="200.0" prefWidth="231.0" styleClass="mytableview" />
+      <ListView fx:id="setsScoresList" layoutX="310.0" layoutY="160.0" prefHeight="200.0" prefWidth="196.0" styleClass="mytableview" />
+      <Label layoutX="80.0" layoutY="130.0" text="Matchs :">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="311.0" layoutY="130.0" text="Sets Scores :">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <ScrollBar fx:id="listViewScrollBar" layoutX="506.0" layoutY="160.0" onScroll="#scrollSynchro" orientation="VERTICAL" prefHeight="200.0" prefWidth="14.0" />
+   </children>
+</AnchorPane>

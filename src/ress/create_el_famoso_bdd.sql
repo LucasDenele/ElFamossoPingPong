@@ -9,7 +9,7 @@ create table if not exists PLAYER
     POINTS INTEGER,
     GENDER VARCHAR(32),
     ENDURANCE INTEGER, 
-    POWER INTEGER
+    POWER INTEGER,
+    primary key(LAST_NAME)
     
 );
-

@@ -44,10 +44,6 @@ public class PlayFriendlyGameController extends SearchController {
 
             warningLabel.setText("");
 
-            rankingAccessBDD.<Player>request("select * from PLAYER where " +
-                    "FIRST_NAME = '"+playerB.substring(0,playerB.indexOf(" "))+
-
-                    "' && LAST_NAME = '"+playerB.substring(playerB.indexOf(" ")+1, playerB.length())+"'").get(0);
             frendlyMatch.setPlayerA(rankingAccessBDD.<Player>request("select * from PLAYER where " +
                     "FIRST_NAME = '"+playerA.substring(0,playerA.indexOf(" "))+
                     "' && LAST_NAME = '"+playerA.substring(playerA.indexOf(" ")+1, playerA.length())+"'").get(0));
@@ -57,10 +53,12 @@ public class PlayFriendlyGameController extends SearchController {
 
             frendlyMatch.setFriendly(true);
             frendlyMatch.setAutoplay(autoplayCheckBox.isSelected());
+            frendlyMatch.setSetToUse();
 
-            frendlyMatch.run();
-
-            frendlyMatch.join();
+            if(autoplayCheckBox.isSelected()){
+                frendlyMatch.run();
+                frendlyMatch.join();
+            }
 
             Stage resultStage = new Stage();
             try {

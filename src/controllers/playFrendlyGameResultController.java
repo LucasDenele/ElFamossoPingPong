@@ -10,7 +10,7 @@ import match.Match;
 import java.util.List;
 
 public class PlayFrendlyGameResultController {
-    Match playableMatch;
+    private Match playableMatch;
     public ListView<String> resultsList;
     public Button playButton;
 

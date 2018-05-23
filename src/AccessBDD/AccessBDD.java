@@ -1,8 +1,6 @@
 package AccessBDD; 
 
-import match.Tournament;
 import player.Player;
-
 import java.sql.*;
 import java.util.*;
 
@@ -20,7 +18,7 @@ public class AccessBDD {
     }
     
     
-    public <T> Vector<T> request(String sqlRequest){
+    public Vector<Player> request(String sqlRequest){
         /* Chargement du driver */
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -28,7 +26,7 @@ public class AccessBDD {
             e.printStackTrace();
         }
 
-        Vector objects = new Vector();
+        Vector players = new Vector();
 
         /* Connexion à la base de donnees */   
         Connection connexion = null;  
@@ -40,36 +38,20 @@ public class AccessBDD {
             ResultSet resultat = statement.executeQuery(sqlRequest);
 
             /* Stockage des donnees recoltees */
-            ResultSetMetaData rsmd = resultat.getMetaData();
 
-            int columnsNumber = rsmd.getColumnCount();
             while(resultat.next()){
-                switch (columnsNumber) {
-                    case 4:
-                        Tournament newTournament = new Tournament(resultat.getString(1),
-                                resultat.getString(2),
-                                resultat.getString(3),
-                                resultat.getString(4)
-                                );
-                        objects.add(newTournament);
-                        break;
-
-                    case 7:
-                        Player newPlayer = new Player(resultat.getString(1),
-                                resultat.getString(2),
-                                resultat.getString(3),
-                                resultat.getDouble(4),
-                                resultat.getString(5),
-                                resultat.getFloat(6),
-                                resultat.getFloat(7));
-                        objects.add(newPlayer);
-                        break;
-                    default:
-                        break;
-                }
-
-
+                Player newPlayer = new Player(resultat.getString(1),
+                        resultat.getString(2),
+                        resultat.getString(3),
+                        resultat.getDouble(4),
+                        resultat.getString(5),
+                        resultat.getFloat(6),
+                        resultat.getFloat(7));
+                players.add(newPlayer);
             }
+
+
+
             
             
         } catch ( SQLException e ) {
@@ -83,7 +65,7 @@ public class AccessBDD {
                     
                 }
         }
-        return objects;
+        return players;
     }
     
     
