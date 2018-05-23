@@ -17,8 +17,6 @@ public class MainMenuController {
 
     @FXML
     public void playFriendlyGameLaunch(ActionEvent actionEvent) throws Exception {
-
-        System.out.println("Launch FriendlyGame");
         try {
             sceneSwitcher.uploadNewScene((Stage)playFriendlyGameButton.getScene().getWindow(),"../fxml/PlayFriendlyGameMainFXML.fxml",600, 400);
         } catch (Exception e) {
@@ -28,8 +26,6 @@ public class MainMenuController {
     }
 
     public void playTournamentLaunch(ActionEvent actionEvent) {
-
-        System.out.println("Launch Tournament");
         try {
             sceneSwitcher.uploadNewScene((Stage)playTournamentButton.getScene().getWindow(),"../fxml/PlayTournamentMainFXML.fxml", 600, 400);
         } catch (Exception e) {
@@ -38,8 +34,6 @@ public class MainMenuController {
     }
 
     public void playYearLaunch(ActionEvent actionEvent) {
-
-        System.out.println("Launch Year");
         try {
             sceneSwitcher.uploadNewScene((Stage)playYearButton.getScene().getWindow(),"../fxml/PlayYearMainFXML.fxml", 600, 400);
         } catch (Exception e) {
@@ -48,8 +42,6 @@ public class MainMenuController {
     }
 
     public void rankingLaunch(ActionEvent actionEvent) {
-
-        System.out.println("Launch Ranking");
        try {
             sceneSwitcher.uploadNewScene((Stage)rankingButton.getScene().getWindow(),"../fxml/RankingFXML.fxml", 600, 400);
         } catch (Exception e) {

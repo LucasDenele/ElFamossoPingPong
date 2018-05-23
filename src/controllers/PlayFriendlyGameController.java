@@ -12,7 +12,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import match.Match;
 import player.Player;
-
 import java.util.TreeSet;
 import java.util.Vector;
 

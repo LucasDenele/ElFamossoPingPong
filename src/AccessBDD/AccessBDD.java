@@ -12,33 +12,34 @@ public class AccessBDD {
     
     
     public AccessBDD(){
-        url = "jdbc:mysql://localhost:3306/el_famoso_bdd?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
+        url = "jdbc:mysql://localhost:3306/" +
+                "el_famoso_bdd?useUnicode=true&useJDBCCompliantTimezoneShift=true" +
+                "&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
         user = "root";
         password = "root";
     }
     
-    
+    //To get something from the BDD:
     public Vector<Player> request(String sqlRequest){
-        /* Chargement du driver */
+        //Driver Loading :
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        Vector players = new Vector();
+        Vector<Player> players = new Vector<Player>();
 
-        /* Connexion à la base de donnees */   
-        Connection connexion = null;  
+        //BDD connection :
+        Connection connection = null;
         try {
-            connexion = DriverManager.getConnection(url, user, password);
+            connection = DriverManager.getConnection(url, user, password);
             
-            /* Creation de l'objet gerant les requetes */
-            Statement statement = connexion.createStatement();
+            // Request object creation :
+            Statement statement = connection.createStatement();
             ResultSet resultat = statement.executeQuery(sqlRequest);
 
-            /* Stockage des donnees recoltees */
-
+            //Create the vector with the results :
             while(resultat.next()){
                 Player newPlayer = new Player(resultat.getString(1),
                         resultat.getString(2),
@@ -50,17 +51,13 @@ public class AccessBDD {
                 players.add(newPlayer);
             }
 
-
-
-            
-            
         } catch ( SQLException e ) {
             e.printStackTrace(); 
         } finally {
-            if ( connexion != null )
+            if ( connection != null )
                 try {
-                    /* Fermeture de la connexion */
-                    connexion.close();
+                    //Close the connection :
+                    connection.close();
                 } catch ( SQLException ignore ) {
                     
                 }
@@ -68,18 +65,18 @@ public class AccessBDD {
         return players;
     }
     
-    
+    //To update something in the BDD :
     public void update(Vector<Player> players){
         for(Player p : players){
-            /* Connexion à la base de donnees */   
-            Connection connexion = null;  
+            //BDD connection :
+            Connection connection = null;
             try {
-                connexion = DriverManager.getConnection(url, user, password);
+                connection = DriverManager.getConnection(url, user, password);
                 
-                /* Creation de l'objet gerant les requetes */
-                Statement statement = connexion.createStatement();
+                //Request object creation :
+                Statement statement = connection.createStatement();
                 
-                /* Mise a jour de la base de donnée */ 
+                //Update the BDD :
                 int statut = statement.executeUpdate("update PLAYER set POINTS='"
                         + Double.toString(p.getPoints()) + "' where FIRST_NAME = '"
                         + p.getFirstName() + "' && LAST_NAME = '" + p.getLastName()
@@ -89,10 +86,10 @@ public class AccessBDD {
             } catch ( SQLException e ) {
                 e.printStackTrace(); 
             } finally {
-                if ( connexion != null )
+                if ( connection != null )
                     try {
-                        /* Fermeture de la connexion */
-                        connexion.close();
+                        //Close the connection :
+                        connection.close();
                     } catch ( SQLException ignore ) {
                         
                     }

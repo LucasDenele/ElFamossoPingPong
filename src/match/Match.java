@@ -43,7 +43,6 @@ public class Match extends Thread{
 	public void setSetToUse() {
 		setToUse = new Set(getPlayerA(), getPlayerB());
 	}
-
 	public Player getPlayerA() {
 		return playerA;
 	}
@@ -73,10 +72,7 @@ public class Match extends Thread{
 	}
 	public void setAutoplay(boolean autoplay) {
 		this.autoplay = autoplay;
-	}
-	public boolean isFriendly() {
-		return friendly;
-	}
+}
 	public void setFriendly(boolean friendly) {
 		this.friendly = friendly;
 	}
@@ -86,12 +82,6 @@ public class Match extends Thread{
 	public int getSetScorePlayerB() {
 		return setScorePlayerB;
 	}
-	public Set getCurrentSet() {
-		return currentSet;
-	}
-	public void setCurrentSet(Set currentSet) {
-		this.currentSet = currentSet;
-	}
 	public double getRondPointsPlayersFactor() {
 		return rondPointsPlayersFactor;
 	}
@@ -100,9 +90,6 @@ public class Match extends Thread{
 	}
 	public List<String> getResults() {
 		return results;
-	}
-	public void setResults(List<String> results) {
-		this.results = results;
 	}
 
 	@Override

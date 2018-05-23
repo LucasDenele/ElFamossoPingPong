@@ -2,14 +2,11 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.util.Pair;
 import match.Match;
 
-import java.util.List;
-
 public class PlayFrendlyGameResultController {
+
     private Match playableMatch;
     public ListView<String> resultsList;
     public Button playButton;
