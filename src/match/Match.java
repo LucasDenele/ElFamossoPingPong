@@ -6,6 +6,7 @@ import player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class Match extends Thread{
 	
@@ -23,7 +24,6 @@ public class Match extends Thread{
 	private Player winnerSet;
 	private Set setToUse;
 	private List<String> results = new ArrayList<String>();
-	private AccessBDD updatePlayersPoints = new AccessBDD();
 	
 	//Constructor
 	public Match(){
@@ -36,7 +36,6 @@ public class Match extends Thread{
 		setRondPointsPlayersFactor(rondPointsPlayersFactor);
 		setFriendly(friendly);
 		setToUse = new Set(getPlayerA(), getPlayerB());
-
 	}
 
 	//Getters & Setters
@@ -109,7 +108,6 @@ public class Match extends Thread{
 	@Override
 	public void run() {
 		Player playerWinner;
-
 		while(getSetScorePlayerA() < 3 && getSetScorePlayerB() < 3){
 			playerWinner = setToUse.runSet();
 			if(playerWinner == getPlayerA()){
@@ -122,16 +120,44 @@ public class Match extends Thread{
 		}
 
 		if(setScorePlayerA == 3) setWinner(getPlayerA());
-		if(setScorePlayerA == 3) setWinner(getPlayerB());
+		if(setScorePlayerB == 3) setWinner(getPlayerB());
 
 		setFinished(true);
+
+		if(getWinner() == getPlayerA()){
+			getPlayerA().setPoints(getPlayerA().getPoints()
+									+ getRondPointsPlayersFactor()
+									* Math.abs(setScorePlayerA - setScorePlayerB)
+									* getPlayerB().getPoints()/getPlayerA().getPoints());
+
+			getPlayerB().setPoints(getPlayerB().getPoints()
+					+ getRondPointsPlayersFactor()
+					* Math.abs(setScorePlayerA - setScorePlayerB)
+					* getPlayerA().getPoints()/getPlayerB().getPoints());
+
+
+		}else{
+			getPlayerA().setPoints(getPlayerA().getPoints()
+					+ getRondPointsPlayersFactor()
+					* Math.abs(setScorePlayerA - setScorePlayerB)
+					* getPlayerB().getPoints()/getPlayerA().getPoints());
+
+			getPlayerB().setPoints(getPlayerB().getPoints()
+					+ getRondPointsPlayersFactor()
+					* Math.abs(setScorePlayerA - setScorePlayerB)
+					* getPlayerA().getPoints()/getPlayerB().getPoints());
+		}
 	}
 
 	public void runManual(){
 		if(!isFinished()){
 			if(!setToUse.isFinished()){
 				setToUse.runPoint();
-				results.add(setToUse.getScorePlayerA()+" - "+setToUse.getScorePlayerB());
+				if(setScorePlayerB+setScorePlayerA == results.size()){
+					results.add(setToUse.getScorePlayerA()+" - "+setToUse.getScorePlayerB());
+				}else{
+					results.set(setScorePlayerB+setScorePlayerA, setToUse.getScorePlayerA()+" - "+setToUse.getScorePlayerB());
+				}
 			}else{
 				winnerSet = setToUse.getWinner();
 				if(winnerSet == playerA){

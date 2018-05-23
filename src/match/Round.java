@@ -2,7 +2,9 @@ package match;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
+import AccessBDD.AccessBDD;
 import player.Player;
 
 public class Round {
@@ -12,6 +14,8 @@ public class Round {
 	private List<Match> matches = new ArrayList<Match>();
 	private List<Player> players = new ArrayList<Player>();
 	private List<Player> winners = new ArrayList<Player>();
+	private Vector<Player> updatePlayersPointsVector = new Vector<>();
+	private AccessBDD updatePlayersPoints = new AccessBDD();
 	
 	//Constructor
 	public Round(double roundPlayerFactor, String roundName, List<Player> players) {
@@ -61,8 +65,16 @@ public class Round {
 			matches.add(newMatch);
 			newMatch.start();
 		}
-		
+
 		while(!allMatchesFinished());
+
+		for(Match it : matches){
+			updatePlayersPointsVector.add(it.getPlayerA());
+			updatePlayersPointsVector.add(it.getPlayerB());
+		}
+
+		updatePlayersPoints.update(updatePlayersPointsVector);
+		System.out.println("Hello");
 
 		for(Match it : matches){
 			winners.add(it.getWinner());

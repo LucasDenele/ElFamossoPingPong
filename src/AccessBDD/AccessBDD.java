@@ -80,10 +80,10 @@ public class AccessBDD {
                 Statement statement = connexion.createStatement();
                 
                 /* Mise a jour de la base de donnée */ 
-                int statut = statement.executeUpdate("update PLAYER set POINTS=\'" 
-                        + Float.toString((float) p.getPoints()) + "' where FIRST_NAME = \'"
-                        + p.getFirstName() + "\' & LAST_NAME = \'" + p.getLastName()
-                        + "\'");
+                int statut = statement.executeUpdate("update PLAYER set POINTS='"
+                        + Double.toString(p.getPoints()) + "' where FIRST_NAME = '"
+                        + p.getFirstName() + "' && LAST_NAME = '" + p.getLastName()
+                        + "'");
 
                             
             } catch ( SQLException e ) {
