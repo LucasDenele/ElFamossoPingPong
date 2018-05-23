@@ -73,7 +73,10 @@ public class SearchController {
     @FXML
     public void searchLaunch(ActionEvent actionEvent) {
         String request = "select * from PLAYER where";
-
+        if(maleChecker.isSelected() && femaleChecker.isSelected()){
+            maleChecker.setSelected(false);
+            femaleChecker.setSelected(false);
+        }
         if(maleChecker.isSelected()) request += " GENDER = 'h' &&";
         if(femaleChecker.isSelected()) request += " GENDER = 'f' &&";
         if(!firstNameBox.getText().equals("")) request += " FIRST_NAME = '"+firstNameBox.getText()+"' &&";

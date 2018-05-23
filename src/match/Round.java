@@ -74,7 +74,6 @@ public class Round {
 		}
 
 		updatePlayersPoints.update(updatePlayersPointsVector);
-		System.out.println("Hello");
 
 		for(Match it : matches){
 			winners.add(it.getWinner());

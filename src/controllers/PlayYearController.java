@@ -6,10 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import match.Match;
 import match.Tournament;
 import match.Year;
 
@@ -17,9 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayYearController extends SwitcherController {
-
-
-    public ProgressBar yearProgressBar;
 
     public Button launchYearButton;
     public Button noButton;
@@ -31,7 +26,6 @@ public class PlayYearController extends SwitcherController {
     private List<Tournament> saveYearTournaments = new ArrayList<>();
 
     public void initialize(){
-        yearProgressBar.setVisible(false);
         launchRankingButton.setVisible(false);
         launchSummaryButton.setVisible(false);
 
@@ -40,25 +34,31 @@ public class PlayYearController extends SwitcherController {
     public void launchYear(ActionEvent actionEvent) {
         launchYearButton.setVisible(false);
         noButton.setVisible(false);
-        yearProgressBar.setVisible(true);
+        textLabel.setText("Calculate..");
 
-        saveYearTournaments.add(year.runTournament("OpenAus"));
-        yearProgressBar.setProgress(1/6);
+        saveYearTournaments.add(year.runTournament("OpenAusM"));
 
-        saveYearTournaments.add(year.runTournament("OpenBra"));
-        yearProgressBar.setProgress(2/6);
+        saveYearTournaments.add(year.runTournament("OpenBraM"));
 
-        saveYearTournaments.add(year.runTournament("OpenChi"));
-        yearProgressBar.setProgress(3/6);
+        saveYearTournaments.add(year.runTournament("OpenChiM"));
 
-        saveYearTournaments.add(year.runTournament("OpenFra"));
-        yearProgressBar.setProgress(4/6);
+        saveYearTournaments.add(year.runTournament("OpenFraM"));
 
-        saveYearTournaments.add(year.runTournament("OpenGer"));
-        yearProgressBar.setProgress(5/6);
+        saveYearTournaments.add(year.runTournament("OpenGerM"));
 
-        saveYearTournaments.add(year.runTournament("OpenUS"));
-        yearProgressBar.setProgress(1);
+        saveYearTournaments.add(year.runTournament("OpenUSM"));
+
+        saveYearTournaments.add(year.runTournament("OpenAusW"));
+
+        saveYearTournaments.add(year.runTournament("OpenBraW"));
+
+        saveYearTournaments.add(year.runTournament("OpenChiW"));
+
+        saveYearTournaments.add(year.runTournament("OpenFraW"));
+
+        saveYearTournaments.add(year.runTournament("OpenGerW"));
+
+        saveYearTournaments.add(year.runTournament("OpenUSW"));
 
         textLabel.setText("Year is Finish!");
         launchRankingButton.setVisible(true);

@@ -2,12 +2,18 @@ package match;
 
 public class Year {
 	private int date;
-	private boolean aus = false;
-	private boolean bra = false;
-	private boolean chi = false;
-	private boolean fra = false;
-	private boolean ger = false;
-	private boolean us = false;
+	private boolean ausM = false;
+	private boolean braM = false;
+	private boolean chiM = false;
+	private boolean fraM = false;
+	private boolean gerM = false;
+	private boolean usM = false;
+	private boolean ausW = false;
+	private boolean braW = false;
+	private boolean chiW = false;
+	private boolean fraW = false;
+	private boolean gerW = false;
+	private boolean usW = false;
 
 		
 	public int getDate() {
@@ -15,42 +21,6 @@ public class Year {
 	}
 	public void setDate(int date) {
 		this.date = date;
-	}
-	public boolean isAus() {
-		return aus;
-	}
-	public void setAus(boolean aus) {
-		this.aus = aus;
-	}
-	public boolean isBra() {
-		return bra;
-	}
-	public void setBra(boolean bra) {
-		this.bra = bra;
-	}
-	public boolean isChi() {
-		return chi;
-	}
-	public void setChi(boolean chi) {
-		this.chi = chi;
-	}
-	public boolean isFra() {
-		return fra;
-	}
-	public void setFra(boolean fra) {
-		this.fra = fra;
-	}
-	public boolean isGer() {
-		return ger;
-	}
-	public void setGer(boolean ger) {
-		this.ger = ger;
-	}
-	public boolean isUs() {
-		return us;
-	}
-	public void setUs(boolean us) {
-		this.us = us;
 	}
 
 	public Year(int date) {
@@ -63,35 +33,65 @@ public class Year {
 		Tournament currentTournament = new Tournament();
 
 		switch(name) {
-			case "OpenAus":
-				currentTournament.run("OpenAus");
-				aus = true;
+			case "OpenAusM":
+				currentTournament.run("OpenAusM");
+				ausM = true;
 				break;
 
-			case "OpenBra":
-				currentTournament.run("OpenBra");
-				bra = true;
+			case "OpenBraM":
+				currentTournament.run("OpenBraM");
+				braM = true;
 				break;
 
-			case "OpenChi":
-				currentTournament.run("OpenChi");
-				chi = true;
+			case "OpenChiM":
+				currentTournament.run("OpenChiM");
+				chiM = true;
 				break;
 
-			case "OpenFra":
-				currentTournament.run("OpenFra");
-				fra = true;
+			case "OpenFraM":
+				currentTournament.run("OpenFraM");
+				fraM = true;
 				break;
 
-			case "OpenGer":
-				currentTournament.run("OpenGer");
-				ger = true;
+			case "OpenGerM":
+				currentTournament.run("OpenGerM");
+				gerM = true;
 				break;
 
-				case "OpenUS":
-					currentTournament.run("OpenUS");
-					us = true;
-					break;
+			case "OpenUSM":
+				currentTournament.run("OpenUSM");
+				usM = true;
+				break;
+
+			case "OpenAusW":
+				currentTournament.run("OpenAusW");
+				ausW = true;
+				break;
+
+			case "OpenBraW":
+				currentTournament.run("OpenBraW");
+				braW = true;
+				break;
+
+			case "OpenChiW":
+				currentTournament.run("OpenChiW");
+				chiW = true;
+				break;
+
+			case "OpenFraW":
+				currentTournament.run("OpenFraW");
+				fraW = true;
+				break;
+
+			case "OpenGerW":
+				currentTournament.run("OpenGerW");
+				gerW = true;
+				break;
+
+			case "OpenUSW":
+				currentTournament.run("OpenUSW");
+				usW= true;
+				break;
 
 				default:
 					System.out.println("Ce tournoi n'est pas simule ici");

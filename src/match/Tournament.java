@@ -48,41 +48,77 @@ public class Tournament {
 	public void run(String name) {
         Vector<Player> playersDTB = new Vector<>();
 		//Choice of the selected tournament
+		System.out.println(name);
 		switch(name) {
-			case "OpenAus":
+			case "OpenAusM":
 				//Request for the 128 best players
-                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER order by POINTS desc limit 128");
-				this.setName("Australian Open");
+                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER where GENDER = 'h' order by POINTS desc limit 128");
+				this.setName("Australian Open Men");
 				break;
 				
-			case "OpenBra":
+			case "OpenBraM":
 				//Request for the 128 worst players
-                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER order by POINTS limit 128");
-				this.setName("Brasilian Open");
+                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER where GENDER = 'h' order by POINTS limit 128");
+				this.setName("Brasilian Open Men");
 				break;
 				
-			case "OpenChi":
+			case "OpenChiM":
 				//Request for the 128 worst players
-                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER order by POINTS limit 128");
-                this.setName("Chinese Open");
+                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER where GENDER = 'h' order by POINTS limit 128");
+                this.setName("Chinese Open Men");
 				break;
 				
-			case "OpenFra":
+			case "OpenFraM":
 				//Request for 128 random players
-                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER order by POINTS desc limit 128");
-				this.setName("French Open");
+                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER where GENDER = 'h' order by POINTS desc limit 128");
+				this.setName("French Open Men");
 				break;
 				
-			case "OpenGer":
+			case "OpenGerM":
 				//Request for 128 random players
-                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER order by POINTS limit 128");
-				this.setName("German Open");
+                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER where GENDER = 'h' order by POINTS limit 128");
+				this.setName("German Open Men");
 				break;
 				
-			case "OpenUS":
+			case "OpenUSM":
 				//Request for the 128 best players
-                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER order by POINTS desc limit 128");
-				this.setName("US Open");
+                playersDTB = playersAccessBDD.<Player>request("select * from PLAYER where GENDER = 'h' order by POINTS desc limit 128");
+				this.setName("US Open Men");
+				break;
+			case "OpenAusW":
+				//Request for the 128 best players
+				playersDTB = playersAccessBDD.<Player>request("select * from PLAYER where GENDER = 'f' order by POINTS desc limit 128");
+				this.setName("Australian Open Women");
+				break;
+
+			case "OpenBraW":
+				//Request for the 128 worst players
+				playersDTB = playersAccessBDD.<Player>request("select * from PLAYER where GENDER = 'f' order by POINTS limit 128");
+				this.setName("Brasilian Open Women");
+				break;
+
+			case "OpenChiW":
+				//Request for the 128 worst players
+				playersDTB = playersAccessBDD.<Player>request("select * from PLAYER where GENDER = 'f' order by POINTS limit 128");
+				this.setName("Chinese Open Women");
+				break;
+
+			case "OpenFraW":
+				//Request for 128 random players
+				playersDTB = playersAccessBDD.<Player>request("select * from PLAYER where GENDER = 'f' order by POINTS desc limit 128");
+				this.setName("French Open Women");
+				break;
+
+			case "OpenGerW":
+				//Request for 128 random players
+				playersDTB = playersAccessBDD.<Player>request("select * from PLAYER where GENDER = 'f' order by POINTS limit 128");
+				this.setName("German Open Women");
+				break;
+
+			case "OpenUSW":
+				//Request for the 128 best players
+				playersDTB = playersAccessBDD.<Player>request("select * from PLAYER where GENDER = 'f' order by POINTS desc limit 128");
+				this.setName("US Open Women");
 				break;
 			
 			default:
