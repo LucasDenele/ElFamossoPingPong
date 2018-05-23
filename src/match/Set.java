@@ -74,7 +74,8 @@ public class Set {
 	public void setFinished(boolean finished) {
 		this.finished = finished;
 	}
-	
+
+
 	//Functions
 	public void runSet() {
 		while(!this.isFinished()) {

@@ -1,5 +1,6 @@
 package match;
 
+import javafx.util.Pair;
 import player.Player;
 
 import java.util.ArrayList;
@@ -141,51 +142,50 @@ public class Match extends Thread{
 			//Player 1
 			this.setPointsReceivedPlayerA(this.playerB.getPoints()/this.playerA.getPoints()
 					*Math.abs(this.getScorePlayerA() - this.getScorePlayerB()));
-			//System.out.println("Match "+this.getId()+" - ReceivedP1 :"+this.getPointsReceivedPlayer1());
+			System.out.println("Match "+this.getId()+" - ReceivedP1 :"+this.getPointsReceivedPlayerA());
 			//player 2
 			this.setPointsReceivedPlayerB(this.playerA.getPoints()/this.playerB.getPoints()
 					*Math.abs(this.getScorePlayerA() - this.getScorePlayerB()));
-			//System.out.println("Match "+this.getId()+" - ReceivedP2 :"+this.getPointsReceivedPlayer2());
+			System.out.println("Match "+this.getId()+" - ReceivedP2 :"+this.getPointsReceivedPlayerB());
 		}
+		/*for(String s : results){
+			System.out.println(s);
+		}*/
 	}
 
 	public void runManual(){
-		if(!isFinished()) {
+		if(!isFinished()){
 			if (sets.isEmpty()) {
-				newSet(0);
-			}
-
-			if (!currentSet.isFinished()) {
-				currentSet.runPoint();
-				if (currentSet.isFinished()) {
-					//System.out.println("A: " + currentSet.getScorePlayerA() + " B:" + currentSet.getScorePlayerB());
-					checkWinner();
-				}
-			} else {
-				checkWinner();
-			}
-
-			if (!this.isFinished() && currentSet.isFinished()) {
 				newSet(sets.size());
-			} else if (this.isFinished()) {
-				//System.out.println("fin");
-				if(!isFriendly()) {
-					//Player 1
-					this.setPointsReceivedPlayerA(this.playerB.getPoints()/this.playerA.getPoints()
-							*Math.abs(this.getScorePlayerA() - this.getScorePlayerB()));
-					//player 2
-					this.setPointsReceivedPlayerB(this.playerA.getPoints()/this.playerB.getPoints()
-							*Math.abs(this.getScorePlayerA() - this.getScorePlayerB()));
-				}
+				sets.add(currentSet);
 			}
-		}
-		else {
-			System.out.println("Match already terminated");
+			if(!currentSet.isFinished()){
+				currentSet.runPoint();
+
+				checkWinner();
+			}else{
+				newSet(sets.size());
+				sets.add(currentSet);
+			}
+			if(currentSet.getId() == results.size()){
+				System.out.println("== : "+currentSet.getId()+" - "+results.size());
+				results.add(currentSet.getScorePlayerA()+" - "+currentSet.getScorePlayerB());
+			}else{
+				System.out.println("!= : "+currentSet.getId()+" - "+results.size());
+				results.set(currentSet.getId(), currentSet.getScorePlayerA()+" - "+currentSet.getScorePlayerB());
+			}
+			if (this.isFinished() && !isFriendly()) {
+					//Player 1
+					this.setPointsReceivedPlayerA(this.playerB.getPoints() / this.playerA.getPoints()
+							* Math.abs(this.getScorePlayerA() - this.getScorePlayerB()));
+					//player 2
+					this.setPointsReceivedPlayerB(this.playerA.getPoints() / this.playerB.getPoints()
+							* Math.abs(this.getScorePlayerA() - this.getScorePlayerB()));
+			}
 		}
 	}
-	
 	public void newSet(int id) {
-		currentSet = new Set(id, this.playerA, this.playerB);
+		this.setCurrentSet(new Set(id, this.playerA, this.playerB));
 
 		if(autoplay){
 			currentSet.runSet();
@@ -197,11 +197,11 @@ public class Match extends Thread{
 	public void checkWinner(){
 		//check who is the winner of the current set
 		if(currentSet.getWinner() == this.playerA) {
-			System.out.println(this.playerA.getLastName()+" wins the set");
+			//System.out.println(this.playerA.getLastName()+" wins the set");
 			this.scorePlayerA += 1;
 		}
 		else if(currentSet.getWinner() == this.playerB) {
-			System.out.println(this.playerB.getLastName()+" wins the set");
+			//System.out.println(this.playerB.getLastName()+" wins the set");
 			this.scorePlayerB += 1;
 		}
 		else {
@@ -213,21 +213,22 @@ public class Match extends Thread{
 			this.setFinished(true);
 		}
 
-		this.results.add(currentSet.getScorePlayerA()+"-"+currentSet.getScorePlayerB());
+		if(autoplay) this.results.add(currentSet.getScorePlayerA()+"-"+currentSet.getScorePlayerB());
 
 		//Winner conditions
 		//P1 Wins the game
-		if(this.scorePlayerA > 2 && this.scorePlayerA - this.scorePlayerB >= 2) {
+		if(this.scorePlayerA > 2) {
 			this.setWinner(playerA);
 			this.setFinished(true);
 		}
 		//P2 Wins the game
-		else if(this.scorePlayerB > 2 && this.scorePlayerB - this.scorePlayerA >= 2) {
+		else if(this.scorePlayerB > 2) {
 			this.setWinner(playerB);
 			this.setFinished(true);
 		}
 
 		//if(currentSet.getWinner() != null)
-		sets.add(currentSet);
+		if(autoplay) sets.add(currentSet);
 	}
+
 }
