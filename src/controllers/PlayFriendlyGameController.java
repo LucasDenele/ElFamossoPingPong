@@ -126,16 +126,16 @@ public class PlayFriendlyGameController extends SearchController {
                             playerA = "";
                             playerB = "";
                         }else {
+                            int findCheckedPlayers = 0;
                             int j = 0;
-                            for (CheckBox its : selectedList.getItems()) {
-                                if (its.isSelected()
-                                        && !playerA.equals(nameList.getItems().get(j).replace(" ", ""))
-                                        && !playerB.equals(nameList.getItems().get(j).replace(" ", ""))) {
-                                    if (playerA.equals("")) {
+                            while(findCheckedPlayers != nomberOfSelectedPlayers){
+                                if(selectedList.getItems().get(j).isSelected()){
+                                    if(playerA.equals("")){
                                         playerA = nameList.getItems().get(j);
-                                    } else {
+                                    }else if(playerB.equals("") &&  !playerA.equals(nameList.getItems().get(j))){
                                         playerB = nameList.getItems().get(j);
                                     }
+                                    findCheckedPlayers++;
                                 }
                                 j++;
                             }
