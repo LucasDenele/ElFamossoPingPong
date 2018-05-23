@@ -43,13 +43,13 @@ public class PlayFriendlyGameController extends SearchController {
         }else{
             warningLabel.setText("");
 
-            rankingAccessBDD.request("select * from PLAYER where " +
+            rankingAccessBDD.<Player>request("select * from PLAYER where " +
                     "FIRST_NAME = '"+playerB.substring(0,playerB.indexOf(" "))+
                     "' && LAST_NAME = '"+playerB.substring(playerB.indexOf(" ")+1, playerB.length())+"'").get(0).display();
-            frendlyMatch.setPlayerA(rankingAccessBDD.request("select * from PLAYER where " +
+            frendlyMatch.setPlayerA(rankingAccessBDD.<Player>request("select * from PLAYER where " +
                     "FIRST_NAME = '"+playerA.substring(0,playerA.indexOf(" "))+
                     "' && LAST_NAME = '"+playerA.substring(playerA.indexOf(" ")+1, playerA.length())+"'").get(0));
-            frendlyMatch.setPlayerB(rankingAccessBDD.request("select * from PLAYER where " +
+            frendlyMatch.setPlayerB(rankingAccessBDD.<Player>request("select * from PLAYER where " +
                     "FIRST_NAME = '"+playerB.substring(0,playerB.indexOf(" "))+
                     "' && LAST_NAME = '"+playerB.substring(playerB.indexOf(" ")+1, playerB.length())+"'").get(0));
 

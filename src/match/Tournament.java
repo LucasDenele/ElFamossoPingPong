@@ -9,11 +9,27 @@ public class Tournament {
 	
 	//Attributes
 	private String name;
+	private String reference;
+	private String date;
+	private String matchs;
 	private List<Round> rounds = new ArrayList<Round>();
 	private List<Player> players = new ArrayList<Player>();
 	private List<Player> playersUpdate = new ArrayList<Player>();
 	private Player winner;
 	private boolean finished = false;
+
+
+	//Constructors
+	public Tournament(){
+		super();
+	}
+
+	public Tournament(String name, String reference, String date, String matchs){
+		this.name = name;
+		this.reference = reference;
+		this.date = date;
+		this.matchs = matchs;
+	}
 	
 	//Getters & Setters
 	public String getName() {
